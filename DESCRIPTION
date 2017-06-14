@@ -1,0 +1,21 @@
+Package: quake
+Type: Package
+Title: Earthquake Data Visualizations
+Version: 0.1.0
+Date: 2016-06-14
+Depends: R (>= 3.3.3)
+Author: Russell Politzky
+Maintainer: Russell Politzky <russell.politzky@gmail.com>
+Description: The quake package provides functions to 
+    load, clean and visualize National Oceanic and Atmospheric Administration (NOAA),
+    earthquake data.  The package provides a specialised geometry to show earthquakes
+    over time, on a timeline.  It also provides a function to show where the quakes 
+    happened on an appropriate map.
+Imports: readr (>= 1.1.0), dplyr (>= 0.5.0), magrittr, data.table, leaflet, ggplot2
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
