@@ -8,41 +8,68 @@
 # date of the earthquake and label which takes the column name from which
 # annotations will be obtained.
 
+
+#' @title A TimelineLabel geometry prototype object
+#'
+#' @description \code{GeomTimelineLabel} is the geometry prototype object
+#' implementing \link{\code{geom_timeline_label}} geometry, layer function.
+#'
+#' @inheritParams
+#'
+#' @return \code{GeomTimelineLabel} doesn't return anything per se.
+#'     instead it functions as a prototype, or template for objects of this
+#'     type.
+#'
+#' @importFrom ggplot2 ggproto
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 alpha
+#' @importFrom grid nullGrob
+#' @importFrom grid textGrob
+#' @importFrom grid textGrob
+#' @importFrom grid segmentsGrob
+#' @importFrom grid gpar
+#' @importFrom grid unit
+#' @importFrom grid gTree
+#' @importFrom grid gList
+#'
+#' @example example_timeline_plot.R
+#'
+#' @export
+
 GeomTimelineLabel  <- ggplot2::ggproto(
-  
+
   "GeomTimelineLabel",
-  
+
   ggplot2::Geom,
-  
+
   required_aes = c("x", "label"),
-  
+
   optional_aes = c(
-    "y", "size", "shape", "colour", "linesize", 
+    "y", "size", "shape", "colour", "linesize",
     "linetype", "fontsize", "stroke", "pointerheight",
     "angle", "labelcolour", "n_max", "fill"
   ),
-  
+
   default_aes  = ggplot2::aes(
-    shape         = 19     , 
-    y             = 1      , 
-    size          = 5      , 
-    alpha         = 0.15   , 
-    colour        = "black", 
+    shape         = 19     ,
+    y             = 1      ,
+    size          = 5      ,
+    alpha         = 0.15   ,
+    colour        = "black",
     linesize      = 0.5    ,
     linetype      = 1      ,
     fontsize      = 10     ,
     stroke        = 1      ,
     pointerheight = 0.05   ,
-    angle         = 45    
+    angle         = 45
   ),
-  
+
   # Don't want any key for labels.
   draw_key = function(data, params, size) grid::nullGrob(),
-               
+
   draw_panel = function(data, panel_scales, coord) {
 
-    # Remove any data with size < n-max
-    sub_set_data <- function(data, n_max) {
+    sub_set_data <- function(data, n_max) { # Remove any data with size < n-max
       if (n_max < (.Machine$integer.max)) {
         num_rows <- nrow(data)
         last_row <- min(n_max, num_rows) # don't try to display rows > nrow of data frame.
@@ -52,7 +79,6 @@ GeomTimelineLabel  <- ggplot2::ggproto(
       }
     }
 
-
     n_max <- data[1, "n_max"]
     data  <- sub_set_data(data, n_max)
     coords <-coord$transform(data, panel_scales)
@@ -60,7 +86,7 @@ GeomTimelineLabel  <- ggplot2::ggproto(
     txt <- grid::textGrob(
       coords$label,
       coords$x,
-      coords$y + (1.2 * coords$pointerheight), # 1.2 provides reasonable spacing. 
+      coords$y + (1.2 * coords$pointerheight), # 1.2 provides reasonable spacing.
       default.units = "native"    ,
       just          = "left"      ,
       rot           = coords$angle,
@@ -71,9 +97,9 @@ GeomTimelineLabel  <- ggplot2::ggproto(
       check.overlap = FALSE #check_overlap
     )
     lines <- grid::segmentsGrob(
-      x0 = coords$x, 
+      x0 = coords$x,
       x1 = coords$x,
-      y0 = coords$y, 
+      y0 = coords$y,
       y1 = coords$y + coords$pointerheight,
       gp = grid::gpar(
         col  = ggplot2::alpha(coords$colour, coords$alpha),
@@ -87,30 +113,38 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 )
 
 
+
+
+
+#' @description \code{geom_timeline_label} adds annotations to earthquake data
+#' timelines. This geom adds a vertical line to each data point with a text
+# annotation (e.g. the location of the earthquake) attached to each line.
+\code(geom_timeline_label)
+# should be an option to subset to n_max number of earthquakes, where we take
+# the n_max largest (by magnitude) earthquakes. Aesthetics are x, which is the
+# date of the earthquake and label which takes the column name from which
+# annotations will be obtained.
+
+
+
+
 geom_timeline_label <- function(mapping     = NULL       , data          = NULL , stat        = "identity",
-                                position    = "identity" , na.rm         = FALSE, show.legend = NA        , 
+                                position    = "identity" , na.rm         = FALSE, show.legend = NA        ,
                                 inherit.aes = TRUE       , pointerheight = 0.05 , angle       = 45        ,
                                 labelcolour = "black"    , n_max         = .Machine$integer.max ,
                                 fill        = "black"    ,
                                 ...) {
   ggplot2::layer(
-    geom = GeomTimelineLabel, mapping = mapping,  
-    data = data, stat = stat, position = position, 
+    geom = GeomTimelineLabel, mapping = mapping,
+    data = data, stat = stat, position = position,
     show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(
-      pointerheight = pointerheight, 
+      pointerheight = pointerheight,
       angle         = angle,
       labelcolour   = labelcolour,
       n_max         = n_max,
-      na.rm         = na.rm, 
+      na.rm         = na.rm,
       ...
     )
   )
 }
-
-
-
- 
-
-
-
