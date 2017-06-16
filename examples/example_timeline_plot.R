@@ -16,6 +16,9 @@ dt <- data.table(
 
 head(dt)
 
+start_date <- as.Date('2017-07-01') # only show quakes from July 2017
+end_date   <- as.Date('2017-07-30') # only show quakes from July 2017
+
 dt %>%
   ggplot() +
   geom_timeline_label(
@@ -25,7 +28,9 @@ dt %>%
       y     = country  ,
       size  = intensity
     ),
-    n_max = 3 # show only the three largest magnitude quakes
+    n_max = 3,
+    xmin = start_date,
+    xmax = end_date
   ) +
   geom_timeline(
     aes(
@@ -34,6 +39,8 @@ dt %>%
       size = intensity,
       col  = deaths
     ),
+    xmin = start_date, # only show quakes from July 2017
+    xmax = end_date,   # only show quakes from July 2017
     alpha = 0.8
   ) +
   labs(x = "DATE")                                     +

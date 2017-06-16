@@ -7,6 +7,40 @@
 
 # look at the example geom_point.
 
+
+#' @title A \code{ggplot2} \cide{Geom} prototype object for timelines
+#'
+#' @description \code{GeomTimeline} is a \code{ggplot2} \cide{Geom} prototype
+#' object for timelines.  The geom plots a time line of earthquakes ranging
+#' from \code{xmin} to \code{xmax} dates with a point for each earthquake.
+#' Optional aesthetics include \code{color}, \code{size}, and \code{alpha} (for transparency).
+#' The \code{x} aesthetic is a \code{Date} and an optional \code{y} aesthetic is a \code{factor}
+#' indicating some stratification in which case multiple time lines will be plotted for each
+#' level of the factor (e.g. country).
+#'
+#' @param
+#'
+#' @return
+#'
+#' @seealso \link{\code{geom_timeline}}
+#'
+#'
+#' @rdname ggplot2-ggproto
+#' @format NULL
+#' @usage NULL
+#'
+#' @importFrom ggplot2 ggproto
+#' @importFrom ggplot2 aes
+#' @importFrom ggplot2 draw_key_point
+#' @importFrom grid pointsGrob
+#' @importFrom ggplot2 alpha
+#' @importFrom grid unit
+#' @importFrom grid gList
+#' @importFrom grid gpar
+#'
+#' @example examples/example_timeline_plot.R
+#'
+#' @export
 GeomTimeline <- ggplot2::ggproto(
   "GeomTimeline",
 
@@ -14,7 +48,11 @@ GeomTimeline <- ggplot2::ggproto(
 
   required_aes = c("x"),
 
-  optional_aes = c("y", "size", "shape", "colour", "fill", "linesize", "linetype", "fontsize", "stroke"),
+  optional_aes = c(
+    "y"       , "size"    , "shape"   , "colour", "fill",
+    "linesize", "linetype", "fontsize", "stroke",
+    "xmin"    ,  "xmax"
+  ),
 
   default_aes  = ggplot2::aes(
     shape    = 19     ,
@@ -26,10 +64,19 @@ GeomTimeline <- ggplot2::ggproto(
     linesize = 0.5    ,
     linetype = 1      ,
     fontsize = 10     ,
-    stroke   = 1
+    stroke   =  1     #,
+    #xmin     = -1     ,
+    #xmax     = -1
   ),
 
   draw_key = ggplot2::draw_key_point,
+
+  setup_data = function(data, params) {
+    data[ # filter based on given xmin and xmax
+       data$x >= params$xmin &
+       data$x <= params$xmax,
+    ]
+  },
 
   draw_panel = function(data, panel_scales, coord) {
     coords <-coord$transform(data, panel_scales)
@@ -65,11 +112,19 @@ GeomTimeline <- ggplot2::ggproto(
 
 geom_timeline <- function(mapping     = NULL,       data        = NULL, stat = "identity",
                           position    = "identity", na.rm       = FALSE,
-                          show.legend = NA        , inherit.aes = TRUE, ...) {
+                          show.legend = NA        , inherit.aes = TRUE,
+                          xmin = .Machine$double.xmin,
+                          xmax = .Machine$double.xmax,
+                          ...) {
   ggplot2::layer(
-    geom = GeomTimeline, mapping = mapping,
-    data = data, stat = stat, position = position,
+    geom = GeomTimeline      , mapping     = mapping    , position = position,
+    data = data              , stat        = stat       ,
     show.legend = show.legend, inherit.aes = inherit.aes,
-    params = list(na.rm = na.rm, ...)
+    params = list(
+      xmin  = as.numeric(xmin),
+      xmax  = as.numeric(xmax),
+      na.rm = na.rm,
+      ...
+      )
   )
 }

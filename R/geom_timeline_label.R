@@ -1,24 +1,18 @@
-
-
-# 2. Build a geom called geom_timeline_label() for adding annotations to the
-# earthquake data. This geom adds a vertical line to each data point with a text
-# annotation (e.g. the location of the earthquake) attached to each line. There
-# should be an option to subset to n_max number of earthquakes, where we take
-# the n_max largest (by magnitude) earthquakes. Aesthetics are x, which is the
-# date of the earthquake and label which takes the column name from which
-# annotations will be obtained.
-
-
 #' @title A TimelineLabel geometry prototype object
 #'
 #' @description \code{GeomTimelineLabel} is the geometry prototype object
-#' implementing \link{\code{geom_timeline_label}} geometry, layer function.
+#' used by the \link{\code{geom_timeline_label}} geometry, layer function.
 #'
 #' @inheritParams
 #'
+#'
+#' @rdname ggplot2-ggproto
+#' @format NULL
+#' @usage NULL
+#'
 #' @return \code{GeomTimelineLabel} doesn't return anything per se.
-#'     instead it functions as a prototype, or template for objects of this
-#'     type.
+#'     Instead \code{GeomTimelineLabel} is as a prototype, or template
+#'     for objects of this type.
 #'
 #' @importFrom ggplot2 ggproto
 #' @importFrom ggplot2 aes
@@ -32,10 +26,9 @@
 #' @importFrom grid gTree
 #' @importFrom grid gList
 #'
-#' @example example_timeline_plot.R
+#' @example examples/example_timeline_plot.R
 #'
 #' @export
-
 GeomTimelineLabel  <- ggplot2::ggproto(
 
   "GeomTimelineLabel",
@@ -47,7 +40,8 @@ GeomTimelineLabel  <- ggplot2::ggproto(
   optional_aes = c(
     "y", "size", "shape", "colour", "linesize",
     "linetype", "fontsize", "stroke", "pointerheight",
-    "angle", "labelcolour", "n_max", "fill"
+    "angle", "labelcolour", "n_max", "fill",
+    "xmin"    ,  "xmax"
   ),
 
   default_aes  = ggplot2::aes(
@@ -61,11 +55,21 @@ GeomTimelineLabel  <- ggplot2::ggproto(
     fontsize      = 10     ,
     stroke        = 1      ,
     pointerheight = 0.05   ,
-    angle         = 45
+    angle         = 45     #,
+    #xmin          = .Machine$double.xmin,
+    #xmax          = .Machine$double.xmax
   ),
 
-  # Don't want any key for labels.
-  draw_key = function(data, params, size) grid::nullGrob(),
+  draw_key = function(data, params, size) grid::nullGrob(),  # Don't want any key for labels.  This is a null function.
+
+  setup_data = GeomTimeline$setup_data,
+
+  # function(data, params) {
+  #   data[ # filter based on given xmin and xmax
+  #       data$x >= params$xmin &
+  #       data$x <= params$xmax,
+  #     ]
+  # },
 
   draw_panel = function(data, panel_scales, coord) {
 
@@ -78,6 +82,13 @@ GeomTimelineLabel  <- ggplot2::ggproto(
         data
       }
     }
+
+    #browser()
+
+    # data <- data[ # filter for xmin and xmax
+    #   data$x >= data$xmin[1] &
+    #   data$x <= data$xmax[1],
+    # ]
 
     n_max <- data[1, "n_max"]
     data  <- sub_set_data(data, n_max)
@@ -94,7 +105,7 @@ GeomTimelineLabel  <- ggplot2::ggproto(
         col       = coords$labelcolour,
         fontsize  = grid::unit(coords$fontsize, "points")
       ),
-      check.overlap = FALSE #check_overlap
+      check.overlap = FALSE # check_overlap
     )
     lines <- grid::segmentsGrob(
       x0 = coords$x,
@@ -112,27 +123,48 @@ GeomTimelineLabel  <- ggplot2::ggproto(
   }
 )
 
-
-
-
-
+#' @md
+#' @title Add text labels to timelines produced with \link{\code{geom_timeline}}
+#'
 #' @description \code{geom_timeline_label} adds annotations to earthquake data
-#' timelines. This geom adds a vertical line to each data point with a text
-# annotation (e.g. the location of the earthquake) attached to each line.
-\code(geom_timeline_label)
-# should be an option to subset to n_max number of earthquakes, where we take
-# the n_max largest (by magnitude) earthquakes. Aesthetics are x, which is the
-# date of the earthquake and label which takes the column name from which
-# annotations will be obtained.
-
-
-
-
+#' timelines produced with \link{\code{geom_timeline}}. This geom adds a vertical
+#' line to each data point with a text annotation (e.g. the location of an
+#' earthquake) attached atop to each line.
+#' \code(geom_timeline_label) provides an option to subset to \code{n_max} number
+#' of earthquakes, where \code{n_max} selects the largest (by magnitude) earthquakes.
+#' This geometry supports the following aesthetics
+#' * x is the date of the earthquake and
+#' * label is the column name from which annotations will be obtained
+#'
+#' @inheritParams
+#' @param pointerheight is a \code{numeric} indicating the height of the pointer lines
+#'     used for labels.  This height is epcified as a faction of the viewport height,
+#'     and will usually not required adjustment.  The default value for this parameter
+#'     is set to 0.05.
+#' @param angle is a \code{numeric} indicating the text label angle. Text is printed
+#'     at an angle to allow good reaability and to reduce label collisions for dense
+#'     time lines.  This angle won't usually require adjustment and is set at 45 degrees
+#'     by default.
+#' @param n_max is a \code{numeric} giving the maximum number of labels to display.  This
+#'     reduces the number of label collisions in dense, timelime plots.  The labels to show
+#'     are chosen based on the \code{size} aestheic.  Setting \code{n_max} will result
+#'     ina maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.
+#' @param labelcolour is a \code{string} giving the label colour.  This is set to 'black' by
+#'     default.
+#'
+#' @return a \code{gg ggplot} object representing timeline labels.  This is intended to be
+#'     used with \link{\code{geom_timeline}}.
+#'
+#' @examples/example_timeline_plot.R
+#
+#' @export
 geom_timeline_label <- function(mapping     = NULL       , data          = NULL , stat        = "identity",
                                 position    = "identity" , na.rm         = FALSE, show.legend = NA        ,
                                 inherit.aes = TRUE       , pointerheight = 0.05 , angle       = 45        ,
                                 labelcolour = "black"    , n_max         = .Machine$integer.max ,
                                 fill        = "black"    ,
+                                xmin        = .Machine$double.xmin,
+                                xmax        = .Machine$double.xmax,
                                 ...) {
   ggplot2::layer(
     geom = GeomTimelineLabel, mapping = mapping,
@@ -142,6 +174,8 @@ geom_timeline_label <- function(mapping     = NULL       , data          = NULL 
       pointerheight = pointerheight,
       angle         = angle,
       labelcolour   = labelcolour,
+      xmax          = as.numeric(xmax),
+      xmin          = as.numeric(xmin),
       n_max         = n_max,
       na.rm         = na.rm,
       ...
