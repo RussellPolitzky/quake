@@ -18,7 +18,7 @@
 #'
 #' @return \code{eq_map} returns a \code{leaflet} map object,
 #'
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @importFrom leaflet leaflet
 #' @importFrom leaflet addTiles
 #' @importFrom leaflet addCircleMarkers

@@ -1,5 +1,7 @@
-require(data.table)
+library(data.table)
+library(magrittr)
+library(quake)
 
-data_file  <- 'NOAA_Data.txt'
-clean_data <- fread(data_file) %>% eq_clean_data
+data_file  <- 'examples/earthquakes.tsv'
+clean_data <- fread(data_file) %>% (quake::eq_clean_data)
 clean_data

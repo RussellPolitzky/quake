@@ -9,7 +9,9 @@
 #'
 #' @return a \code{character} of cleaned names with country removed and in title case.
 #'
-#' @import magrittr
+#' @importFrom magrittr "%>%"
+#' @importFrom stringr str_match
+#' @importFrom stringr str_trim
 #'
 #' @example examples/example_clean_data.R
 #'

@@ -1,16 +1,6 @@
-# Build a geom for ggplot2 called geom_timeline() for plotting a time line of
-# earthquakes ranging from xmin to xmax dates with a point for each earthquake.
-# Optional aesthetics include color, size, and alpha (for transparency). The
-# x aesthetic is a date and an optional y aesthetic is a factor indicating some
-# stratification in which case multiple time lines will be plotted for each
-# level of the factor (e.g. country).
-
-# look at the example geom_point.
-
-
-#' @title A \code{ggplot2} \cide{Geom} prototype object for timelines
+#' @title A \code{ggplot2} \code{Geom} prototype object for timelines
 #'
-#' @description \code{GeomTimeline} is a \code{ggplot2} \cide{Geom} prototype
+#' @description \code{GeomTimeline} is a \code{ggplot2} \code{Geom} prototype
 #' object for timelines.  The geom plots a time line of earthquakes ranging
 #' from \code{xmin} to \code{xmax} dates with a point for each earthquake.
 #' Optional aesthetics include \code{color}, \code{size}, and \code{alpha} (for transparency).
@@ -18,14 +8,11 @@
 #' indicating some stratification in which case multiple time lines will be plotted for each
 #' level of the factor (e.g. country).
 #'
-#' @param
+#' @return \code{GeomTimeline} is a \code{ggplot2} prototype object; a collection of
+#'     functions and does not return anything perse.
 #'
-#' @return
+#' @seealso \code{\link{geom_timeline}}
 #'
-#' @seealso \link{\code{geom_timeline}}
-#'
-#'
-#' @rdname ggplot2-ggproto
 #' @format NULL
 #' @usage NULL
 #'
@@ -64,9 +51,7 @@ GeomTimeline <- ggplot2::ggproto(
     linesize = 0.5    ,
     linetype = 1      ,
     fontsize = 10     ,
-    stroke   =  1     #,
-    #xmin     = -1     ,
-    #xmax     = -1
+    stroke   =  1
   ),
 
   draw_key = ggplot2::draw_key_point,
@@ -110,19 +95,51 @@ GeomTimeline <- ggplot2::ggproto(
 })
 
 
+
+#' @title A \code{ggplot2} layer function for timelines
+#'
+#' @description \code{geom_timeline} is a \code{ggplot2} layer function
+#' representing timelines.  code{geom_timeline} plots a time line of evenst ranging
+#' from \code{xmin} to \code{xmax} dates, with a point for each event
+#' Optional aesthetics include \code{color}, \code{size}, and \code{alpha} (for transparency).
+#' The \code{x} aesthetic is usually a \code{Date} and an optional \code{y} aesthetic is a \code{factor}
+#' indicating some stratification in which case multiple time lines will be plotted for each
+#' level of the factor (e.g. country).
+#'
+#' @inheritParams ggplot2::layer
+#'
+#' @param xmin any type coercible to a \code{numeric} without additional parameters.
+#'     \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
+#'     aesthetic, since it's specifies the lower bound for it.  That's so say, the
+#'     timeline will only show events in the data where \code{x >= xmin}.
+#'
+#' @param xmax any type coercible to a \code{numeric} without additional parameters.
+#'     \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
+#'     aesthetic, since it's specifies the lower bound for it.  That's so say, the
+#'     timeline will only show events in the data where \code{x <= xmin}.
+#'
+#' @return a ggplot2 layer object.
+#'
+#' @seealso \code{\link{geom_timeline_label}}
+#'
+#' @importFrom ggplot2 layer
+#'
+#' @example examples/example_timeline_plot.R
+#'
+#' @export
 geom_timeline <- function(mapping     = NULL,       data        = NULL, stat = "identity",
                           position    = "identity", na.rm       = FALSE,
                           show.legend = NA        , inherit.aes = TRUE,
-                          xmin = .Machine$double.xmin,
-                          xmax = .Machine$double.xmax,
+                          xmin        = .Machine$double.xmin,
+                          xmax        = .Machine$double.xmax,
                           ...) {
   ggplot2::layer(
     geom = GeomTimeline      , mapping     = mapping    , position = position,
     data = data              , stat        = stat       ,
     show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(
-      xmin  = as.numeric(xmin),
-      xmax  = as.numeric(xmax),
+      xmin  = as.numeric(xmin), # deals with dates and factors
+      xmax  = as.numeric(xmax), # deals with dates and factors
       na.rm = na.rm,
       ...
       )

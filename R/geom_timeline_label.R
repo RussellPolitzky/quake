@@ -1,11 +1,10 @@
 #' @title A TimelineLabel geometry prototype object
 #'
 #' @description \code{GeomTimelineLabel} is the geometry prototype object
-#' used by the \link{\code{geom_timeline_label}} geometry, layer function.
+#' used by the \code{\link{geom_timeline_label}} geometry, layer function.
 #'
 #' @inheritParams ggplot2::Geom
 #'
-#' @rdname ggplot2-ggproto
 #' @format NULL
 #' @usage NULL
 #'
@@ -115,7 +114,7 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' timelines produced with \link{\code{geom_timeline}}. This geom adds a vertical
 #' line to each data point with a text annotation (e.g. the location of an
 #' earthquake) attached atop to each line.
-#' \code(geom_timeline_label) provides an option to subset to \code{n_max} number
+#' \code{geom_timeline_label} provides an option to subset to \code{n_max} number
 #' of earthquakes, where \code{n_max} selects the largest (by magnitude) earthquakes.
 #' This geometry supports the following aesthetics
 #' * x is the date of the earthquake and

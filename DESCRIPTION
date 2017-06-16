@@ -11,7 +11,7 @@ Description: The quake package provides functions to
     earthquake data.  The package provides a specialised geometry to show earthquakes
     over time, on a timeline.  It also provides a function to show where the quakes 
     happened on an appropriate map.
-Imports: readr (>= 1.1.0), dplyr (>= 0.5.0), magrittr, data.table, leaflet, ggplot2
+Imports: readr (>= 1.1.0), dplyr (>= 0.5.0), magrittr, data.table, leaflet, ggplot2, stringr
 License: CC0
 Encoding: UTF-8
 LazyData: true

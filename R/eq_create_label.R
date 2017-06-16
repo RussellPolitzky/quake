@@ -11,8 +11,6 @@
 #'
 #' @return a vector of HTML encoded, label \code{string}s.
 #'
-#' @importFrom data.table as.data.table
-#'
 #' @example examples/example_mapping_functions.R
 #'
 #' @export
@@ -26,13 +24,9 @@ eq_create_label <- function(data) {
     )
   }
 
-  # If reader and dplyr are used then this won't be a
-  # data.table, hence the need to convert it.
-  data <- data.table::as.data.table(data)
-
-  data[,
-       html_label(
-         get("clean_location"), get("EQ_PRIMARY"), get("TOTAL_DEATHS")
-       )
-  ]
+  html_label(
+    location     = data[, "clean_location"],
+    magnitude    = data[, "EQ_PRIMARY"    ],
+    total_deaths = data[, "TOTAL_DEATHS"  ]
+  )
 }
