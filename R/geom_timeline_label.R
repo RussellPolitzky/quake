@@ -3,8 +3,7 @@
 #' @description \code{GeomTimelineLabel} is the geometry prototype object
 #' used by the \link{\code{geom_timeline_label}} geometry, layer function.
 #'
-#' @inheritParams
-#'
+#' @inheritParams ggplot2::Geom
 #'
 #' @rdname ggplot2-ggproto
 #' @format NULL
@@ -38,14 +37,14 @@ GeomTimelineLabel  <- ggplot2::ggproto(
   required_aes = c("x", "label"),
 
   optional_aes = c(
-    "y", "size", "shape", "colour", "linesize",
-    "linetype", "fontsize", "stroke", "pointerheight",
-    "angle", "labelcolour", "n_max", "fill",
-    "xmin"    ,  "xmax"
+    "y", "size", "shape", "colour",
+    "linesize", "linetype", "fontsize", "stroke",
+    "pointerheight", "angle", "labelcolour",
+    "n_max", "fill", "xmin" ,  "xmax"
   ),
 
   default_aes  = ggplot2::aes(
-    shape         = 19     ,
+    shape         = 19     , # shape 19 is a circle.
     y             = 1      ,
     size          = 5      ,
     alpha         = 0.15   ,
@@ -55,25 +54,14 @@ GeomTimelineLabel  <- ggplot2::ggproto(
     fontsize      = 10     ,
     stroke        = 1      ,
     pointerheight = 0.05   ,
-    angle         = 45     #,
-    #xmin          = .Machine$double.xmin,
-    #xmax          = .Machine$double.xmax
+    angle         = 45
   ),
 
-  draw_key = function(data, params, size) grid::nullGrob(),  # Don't want any key for labels.  This is a null function.
+  draw_key = function(data, params, size) grid::nullGrob(), # Don't want any key for labels.  This is a null function.
 
-  setup_data = GeomTimeline$setup_data,
-
-  # function(data, params) {
-  #   data[ # filter based on given xmin and xmax
-  #       data$x >= params$xmin &
-  #       data$x <= params$xmax,
-  #     ]
-  # },
-
-  draw_panel = function(data, panel_scales, coord) {
-
+  setup_data = function(data, params) {
     sub_set_data <- function(data, n_max) { # Remove any data with size < n-max
+
       if (n_max < (.Machine$integer.max)) {
         num_rows <- nrow(data)
         last_row <- min(n_max, num_rows) # don't try to display rows > nrow of data frame.
@@ -83,15 +71,12 @@ GeomTimelineLabel  <- ggplot2::ggproto(
       }
     }
 
-    #browser()
+    data                              %>%
+      GeomTimeline$setup_data(params) %>% # filter by nmax and nmin
+      sub_set_data(params$n_max)          # filter to show only n_max by size.
+  },
 
-    # data <- data[ # filter for xmin and xmax
-    #   data$x >= data$xmin[1] &
-    #   data$x <= data$xmax[1],
-    # ]
-
-    n_max <- data[1, "n_max"]
-    data  <- sub_set_data(data, n_max)
+  draw_panel = function(data, panel_scales, coord) {
     coords <-coord$transform(data, panel_scales)
     if (length(unique(coords$y)) == 1) coords$y = 0.1875 # plot line close to the bottom of the panel
     txt <- grid::textGrob(
@@ -136,7 +121,8 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' * x is the date of the earthquake and
 #' * label is the column name from which annotations will be obtained
 #'
-#' @inheritParams
+#' @inheritParams ggplot2::layer
+#'
 #' @param pointerheight is a \code{numeric} indicating the height of the pointer lines
 #'     used for labels.  This height is epcified as a faction of the viewport height,
 #'     and will usually not required adjustment.  The default value for this parameter

@@ -4,7 +4,8 @@ library(data.table)
 library(ggplot2   )
 
 # Create dummy data
-n         <- 100
+
+n         <- 100 # start with 100 data samples
 countries <- c("USA", "China", "India", "South Africa")
 
 dt <- data.table(
@@ -14,10 +15,11 @@ dt <- data.table(
   deaths    = runif(n)*12
 )
 
-head(dt)
+head(dt) # show dummy data
 
-start_date <- as.Date('2017-07-01') # only show quakes from July 2017
-end_date   <- as.Date('2017-07-30') # only show quakes from July 2017
+start_date       <- as.Date('2017-07-01') # only show quakes from July 2017
+end_date         <- as.Date('2017-07-30') # only show quakes from July 2017
+no_labels_toshow <- 3 # show only three labels from highest intensity quakes
 
 dt %>%
   ggplot() +
@@ -28,9 +30,9 @@ dt %>%
       y     = country  ,
       size  = intensity
     ),
-    n_max = 3,
-    xmin = start_date,
-    xmax = end_date
+    n_max = no_labels_toshow,
+    xmin  = start_date,
+    xmax  = end_date
   ) +
   geom_timeline(
     aes(
@@ -39,8 +41,8 @@ dt %>%
       size = intensity,
       col  = deaths
     ),
-    xmin = start_date, # only show quakes from July 2017
-    xmax = end_date,   # only show quakes from July 2017
+    xmin  = start_date,
+    xmax  = end_date,
     alpha = 0.8
   ) +
   labs(x = "DATE")                                     +
