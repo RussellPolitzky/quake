@@ -7,7 +7,7 @@
 #' @param locations is a \code{character} vector of locations.  Each vector element
 #'     is in the "GREECE:  THERA ISLAND (SANTORINI)" form.
 #'
-#' @return a \code{character} of cleaned names with country removed and in title case.
+#' @return a \code{character} vector of cleaned names with country removed and in title case.
 #'
 #' @importFrom magrittr "%>%"
 #' @importFrom stringr str_match
@@ -18,12 +18,8 @@
 #' @export
 eq_location_clean <- function(locations) {
   to_title_case <- function(words) gsub("(^|[[:space:]])([[:alpha:]])", "\\1\\U\\2", words, perl=TRUE) # see: https://stackoverflow.com/questions/6364783/capitalize-the-first-letter-of-both-words-in-a-two-word-string
-  location <-
-    stringr::str_match(locations, "[^:]*$")[,1] %>%
-    stringr::str_trim(side = "left") %>%
+
+  stringr::str_match(locations, "[^:]*$")[,1] %>%
+    stringr::str_trim(side = "left")          %>%
     to_title_case
-  country <-
-    stringr::str_match(locations, "^[^:]*")[,1] %>%
-    to_title_case
-  list("location" = location, "country" = country)
 }

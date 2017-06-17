@@ -11,7 +11,7 @@ eq_location_clean(locations)
 is in the "GREECE:  THERA ISLAND (SANTORINI)" form.}
 }
 \value{
-a \code{character} of cleaned names with country removed and in title case.
+a \code{character} vector of cleaned names with country removed and in title case.
 }
 \description{
 \code{eq_location_clean} cleans the strings in the \code{LOCATION_NAME} column

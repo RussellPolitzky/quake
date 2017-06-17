@@ -43,9 +43,7 @@ library(dplyr)
 library(lubridate)
 
 read_delim("examples/earthquakes.tsv.gz", delim = "\\t") \%>\%
-  eq_clean_data() \%>\%  View()
-
-
+  eq_clean_data()  \%>\% View
 
 read_delim("examples/earthquakes.tsv.gz", delim = "\\t") \%>\%
   eq_clean_data()                                       \%>\%
