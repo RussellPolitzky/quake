@@ -24,6 +24,8 @@ eq_create_label <- function(data) {
     )
   }
 
+  browser()
+
   html_label(
     location     = data[, "clean_location"],
     magnitude    = data[, "EQ_PRIMARY"    ],

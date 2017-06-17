@@ -21,6 +21,7 @@
 #' @importFrom lubridate ymd_hms
 #' @importFrom lubridate years
 #' @importFrom gtools na.replace
+#' @importFrom dplyr mutate
 #'
 #' @example examples/example_clean_data.R
 #'
@@ -29,25 +30,40 @@ eq_clean_data <- function(raw_data) {
   # Dates parsing requires special attention due to the fact
   # that BC dates are present in the dataset.
   parse_dates <- function(yrs, mths, dys, hrs, mins, secs) {
-    leap_year    <- 2016 # Any year with all days present, ie. any leap year
-    date_strings <- paste(
-      paste(leap_year, mths, dys , sep = '-'),
-      paste(hrs      , mins, secs, sep = ":")
-    )
-    lubridate::ymd_hms(date_strings) + lubridate::years(yrs - leap_year)
+    leap_year <- 2016 # Any year with all days present, ie. any leap year
+    ISOdatetime(leap_year, mths, dys, hrs, mins, secs, tz = "UTC") +
+      lubridate::years(yrs - leap_year)
   }
 
-  raw_data["LATITUDE" ] <- as.numeric(        raw_data[, "LATITUDE" ]) # Not needed with fread
-  raw_data["LONGITUDE"] <- as.numeric(        raw_data[, "LONGITUDE"]) # Not needed with fread
-  raw_data[ "SECOND"  ] <- gtools::na.replace(raw_data[, "SECOND"   ], 0)
-  raw_data[ "MINUTE"  ] <- gtools::na.replace(raw_data[, "MINUTE"   ], 0)
-  raw_data[ "HOUR"    ] <- gtools::na.replace(raw_data[, "HOUR"     ], 0)
-  raw_data[ "DAY"     ] <- gtools::na.replace(raw_data[, "DAY"      ], 1)
-  raw_data[ "MONTH"   ] <- gtools::na.replace(raw_data[, "MONTH"    ], 1)
-  raw_data[ "date"    ] <- parse_dates(
-    raw_data[, "YEAR" ], raw_data[, "MONTH" ], raw_data[, "DAY"   ],
-    raw_data[, "HOUR" ], raw_data[, "MINUTE"], raw_data[, "SECOND"]
+  dplyr::mutate(raw_data,
+    "LATITUDE"  = as.numeric        (.data[["LATITUDE" ]]   ),
+    "LONGITUDE" = as.numeric        (.data[["LONGITUDE"]]   ),
+    "SECOND"    = gtools::na.replace(as.integer(trimws(.data[["SECOND"]])), 0),
+    "MINUTE"    = gtools::na.replace(.data[["MINUTE"   ]], 0),
+    "HOUR"      = gtools::na.replace(.data[["HOUR"     ]], 0),
+    "DAY"       = gtools::na.replace(.data[["DAY"      ]], 1),
+    "MONTH"     = gtools::na.replace(.data[["MONTH"    ]], 1)) %>%
+  dplyr::mutate(
+    "date" = parse_dates(
+      .data[[ "YEAR" ]], .data[[ "MONTH" ]], .data[[ "DAY"   ]],
+      .data[[ "HOUR" ]], .data[[ "MINUTE"]], .data[[ "SECOND"]]
+    )
   )
-  raw_data["clean_location"] <- eq_location_clean(raw_data[, "LOCATION_NAME"])
-  raw_data
+
+
+  # raw_data <- as.data.table(raw_data)
+  #
+  # raw_data["LATITUDE" ] <- as.numeric(        raw_data[, get("LATITUDE" )]) # Not needed with fread
+  # raw_data["LONGITUDE"] <- as.numeric(        raw_data[, get("LONGITUDE")]) # Not needed with fread
+  # raw_data[ "SECOND"  ] <- gtools::na.replace(raw_data[, get("SECOND"   )], 0)
+  # raw_data[ "MINUTE"  ] <- gtools::na.replace(raw_data[, get("MINUTE"   )], 0)
+  # raw_data[ "HOUR"    ] <- gtools::na.replace(raw_data[, get("HOUR"     )], 0)
+  # raw_data[ "DAY"     ] <- gtools::na.replace(raw_data[, get("DAY"      )], 1)
+  # raw_data[ "MONTH"   ] <- gtools::na.replace(raw_data[, get("MONTH"    )], 1)
+  # raw_data[ "date"    ] <- parse_dates(
+  #   raw_data[, "YEAR" ], raw_data[, "MONTH" ], raw_data[, "DAY"   ],
+  #   raw_data[, "HOUR" ], raw_data[, "MINUTE"], raw_data[, "SECOND"]
+  # )
+  # raw_data["clean_location"] <- eq_location_clean(raw_data[, "LOCATION_NAME"])
+  # raw_data
 }
