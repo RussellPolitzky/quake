@@ -72,6 +72,6 @@ dt \%>\%
   theme_timeline_with_y_axis_text
 }
 \seealso{
-\code{\link{geom_timeline}}
+\link{geom_timeline}
 }
 \keyword{datasets}

@@ -20,9 +20,12 @@ The \code{data.frame} should contain the following columns
 \item "MONTH"
 }}
 }
+\value{
+a \code{tbl data.frame} containing the cleaned data.
+}
 \description{
 \code{eq_clean_data} takes a NOAA data frame and returns a cleaned
-\code{data.table data.frame}.  The clean \code{data.table data.frame} has
+\code{data.frame}.  The clean \code{data.table data.frame} has
 a date column, of type \code{Date}, created by uniting the year, month,
 day columns from the raw data.  The \code{LATITUDE} and \code{LONGITUDE}
 are converted to \code{numeric}s.
@@ -33,6 +36,6 @@ library(magrittr)
 library(quake)
 
 data_file  <- 'examples/earthquakes.tsv'
-clean_data <- fread(data_file) \%>\% (quake::eq_clean_data)
+clean_data <- fread(data_file) \%>\% eq_clean_data
 clean_data
 }

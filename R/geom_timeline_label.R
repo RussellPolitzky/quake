@@ -1,7 +1,7 @@
 #' @title A TimelineLabel geometry prototype object
 #'
 #' @description \code{GeomTimelineLabel} is the geometry prototype object
-#' used by the \code{\link{geom_timeline_label}} geometry, layer function.
+#' used by the \link{geom_timeline_label} geometry, layer function.
 #'
 #' @inheritParams ggplot2::Geom
 #'
@@ -9,8 +9,8 @@
 #' @usage NULL
 #'
 #' @return \code{GeomTimelineLabel} doesn't return anything per se.
-#'     Instead \code{GeomTimelineLabel} is as a prototype, or template
-#'     for objects of this type.
+#' Instead \code{GeomTimelineLabel} is as a prototype, or template
+#' for objects of this type.
 #'
 #' @importFrom ggplot2 ggproto
 #' @importFrom ggplot2 aes
@@ -24,7 +24,7 @@
 #' @importFrom grid gTree
 #' @importFrom grid gList
 #'
-#' @example examples/example_timeline_plot.R
+#' @example examples/example_timeline_label.R
 #'
 #' @export
 GeomTimelineLabel  <- ggplot2::ggproto(
@@ -123,24 +123,24 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' @inheritParams ggplot2::layer
 #'
 #' @param pointerheight is a \code{numeric} indicating the height of the pointer lines
-#'     used for labels.  This height is epcified as a faction of the viewport height,
-#'     and will usually not required adjustment.  The default value for this parameter
-#'     is set to 0.05.
+#' used for labels.  This height is epcified as a faction of the viewport height,
+#' and will usually not required adjustment.  The default value for this parameter
+#' is set to 0.05.
 #' @param angle is a \code{numeric} indicating the text label angle. Text is printed
-#'     at an angle to allow good reaability and to reduce label collisions for dense
-#'     time lines.  This angle won't usually require adjustment and is set at 45 degrees
-#'     by default.
+#' at an angle to allow good reaability and to reduce label collisions for dense
+#' time lines.  This angle won't usually require adjustment and is set at 45 degrees
+#' by default.
 #' @param n_max is a \code{numeric} giving the maximum number of labels to display.  This
-#'     reduces the number of label collisions in dense, timelime plots.  The labels to show
-#'     are chosen based on the \code{size} aestheic.  Setting \code{n_max} will result
-#'     ina maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.
+#' reduces the number of label collisions in dense, timelime plots.  The labels to show
+#' are chosen based on the \code{size} aestheic.  Setting \code{n_max} will result
+#' in a maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.
 #' @param labelcolour is a \code{string} giving the label colour.  This is set to 'black' by
-#'     default.
+#' default.
 #'
 #' @return a \code{gg ggplot} object representing timeline labels.  This is intended to be
-#'     used with \link{\code{geom_timeline}}.
+#' used with \link{\code{geom_timeline}}.
 #'
-#' @examples/example_timeline_plot.R
+#' @examples/example_timeline_label.R
 #
 #' @export
 geom_timeline_label <- function(mapping     = NULL       , data          = NULL , stat        = "identity",

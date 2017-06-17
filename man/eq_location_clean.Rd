@@ -15,8 +15,8 @@ a \code{character} vector of cleaned names with country removed and in title cas
 }
 \description{
 \code{eq_location_clean} cleans the strings in the \code{LOCATION_NAME} column
-   of the supplied NOAA \code{data.frame}. \code{eq_location_clean} strippsout the country
-   name (including the colon) and converts names to title case (as opposed to all caps).
+of the supplied NOAA \code{data.frame}. \code{eq_location_clean} strippsout the country
+name (including the colon) and converts names to title case (as opposed to all caps).
 }
 \examples{
 library(data.table)
@@ -24,6 +24,6 @@ library(magrittr)
 library(quake)
 
 data_file  <- 'examples/earthquakes.tsv'
-clean_data <- fread(data_file) \%>\% (quake::eq_clean_data)
+clean_data <- fread(data_file) \%>\% eq_clean_data
 clean_data
 }

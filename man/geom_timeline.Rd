@@ -121,5 +121,5 @@ dt \%>\%
   theme_timeline_with_y_axis_text
 }
 \seealso{
-\code{\link{geom_timeline_label}}
+link{geom_timeline_label}
 }

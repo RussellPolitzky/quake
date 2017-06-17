@@ -11,7 +11,7 @@
 #' @return \code{GeomTimeline} is a \code{ggplot2} prototype object; a collection of
 #'     functions and does not return anything perse.
 #'
-#' @seealso \code{\link{geom_timeline}}
+#' @seealso \link{geom_timeline}
 #'
 #' @format NULL
 #' @usage NULL
@@ -25,7 +25,7 @@
 #' @importFrom grid gList
 #' @importFrom grid gpar
 #'
-#' @example examples/example_timeline_plot.R
+#' @example examples/example_timeline_label.R
 #'
 #' @export
 GeomTimeline <- ggplot2::ggproto(
@@ -109,22 +109,22 @@ GeomTimeline <- ggplot2::ggproto(
 #' @inheritParams ggplot2::layer
 #'
 #' @param xmin any type coercible to a \code{numeric} without additional parameters.
-#'     \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
-#'     aesthetic, since it's specifies the lower bound for it.  That's so say, the
-#'     timeline will only show events in the data where \code{x >= xmin}.
+#' \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
+#' aesthetic, since it's specifies the lower bound for it.  That's so say, the
+#' timeline will only show events in the data where \code{x >= xmin}.
 #'
 #' @param xmax any type coercible to a \code{numeric} without additional parameters.
-#'     \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
-#'     aesthetic, since it's specifies the lower bound for it.  That's so say, the
-#'     timeline will only show events in the data where \code{x <= xmin}.
+#' \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
+#' aesthetic, since it's specifies the lower bound for it.  That's so say, the
+#' timeline will only show events in the data where \code{x <= xmin}.
 #'
 #' @return a ggplot2 layer object.
 #'
-#' @seealso \code{\link{geom_timeline_label}}
+#' @seealso link{geom_timeline_label}
 #'
 #' @importFrom ggplot2 layer
 #'
-#' @example examples/example_timeline_plot.R
+#' @example examples/example_timeline_label.R
 #'
 #' @export
 geom_timeline <- function(mapping     = NULL,       data        = NULL, stat = "identity",

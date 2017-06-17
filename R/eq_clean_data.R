@@ -2,7 +2,7 @@
 #' @title Clean earthquake data
 #'
 #' @description \code{eq_clean_data} takes a NOAA data frame and returns a cleaned
-#' \code{data.table data.frame}.  The clean \code{data.table data.frame} has
+#' \code{data.frame}.  The clean \code{data.table data.frame} has
 #' a date column, of type \code{Date}, created by uniting the year, month,
 #' day columns from the raw data.  The \code{LATITUDE} and \code{LONGITUDE}
 #' are converted to \code{numeric}s.
@@ -17,6 +17,8 @@
 #' * "HOUR"
 #' * "DAY"
 #' * "MONTH"
+#'
+#' @return a \code{tbl data.frame} containing the cleaned data.
 #'
 #' @importFrom lubridate ymd_hms
 #' @importFrom lubridate years
@@ -36,17 +38,18 @@ eq_clean_data <- function(raw_data) {
     as.Date(ctd)
   }
 
-  dplyr::mutate(raw_data,
-    "LATITUDE"  = as.numeric        (.data[["LATITUDE" ]]   ),
-    "LONGITUDE" = as.numeric        (.data[["LONGITUDE"]]   ),
-    "SECOND"    = gtools::na.replace(as.integer(trimws(.data[["SECOND"]])), 0),
-    "MINUTE"    = gtools::na.replace(.data[["MINUTE"   ]], 0),
-    "HOUR"      = gtools::na.replace(.data[["HOUR"     ]], 0),
-    "DAY"       = gtools::na.replace(.data[["DAY"      ]], 1),
-    "MONTH"     = gtools::na.replace(.data[["MONTH"    ]], 1),
-    "date"      = parse_dates(
-      .data[[ "YEAR" ]], .data[[ "MONTH" ]], .data[[ "DAY"   ]],
-      .data[[ "HOUR" ]], .data[[ "MINUTE"]], .data[[ "SECOND"]]),
-    "clean_location" = eq_location_clean(.data[[ "LOCATION_NAME"]])
+  dplyr::mutate_(raw_data,
+    "SECOND"    = ~gtools::na.replace(as.integer(trimws(SECOND)), 0),
+    "LATITUDE"  = ~as.numeric        (LATITUDE ),
+    "LONGITUDE" = ~as.numeric        (LONGITUDE),
+    "MINUTE"    = ~gtools::na.replace(MINUTE, 0),
+    "HOUR"      = ~gtools::na.replace(HOUR  , 0),
+    "DAY"       = ~gtools::na.replace(DAY   , 1),
+    "MONTH"     = ~gtools::na.replace(MONTH , 1),
+    "date"      = ~parse_dates(
+      YEAR, MONTH, DAY,
+      HOUR, MINUTE, SECOND
+    ),
+    "clean_location" = ~eq_location_clean(LOCATION_NAME)
   )
 }
