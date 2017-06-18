@@ -220,7 +220,7 @@ dt %>%
   theme_timeline_with_y_axis_text
 ```
 
-## Locating Quakes in a Map
+## Locating Quakes on a Map
 
 `quake` also maps NOAA data making it easy to identify fault lines.
 
