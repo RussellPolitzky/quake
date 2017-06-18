@@ -13,7 +13,7 @@
 #'
 #' @importFrom dplyr pull
 #'
-#' @example examples/example_mapping_functions.R
+#' @example inst/examples/example_mapping_functions.R
 #'
 #' @export
 eq_create_label <- function(data) {

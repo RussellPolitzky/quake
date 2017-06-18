@@ -6,7 +6,7 @@
 #' @importFrom ggplot2 theme
 #' @importFrom ggplot2 element_blank
 #'
-#' @example examples/example_timeline_label.R
+#' @example inst/examples/example_timeline_label.R
 #'
 #' @export
 theme_timeline <- ggplot2::theme(
@@ -26,7 +26,7 @@ theme_timeline <- ggplot2::theme(
 #' @importFrom ggplot2 theme
 #' @importFrom ggplot2 element_blank
 #'
-#' @example examples/example_timeline_label.R
+#' @example inst/examples/example_timeline_label.R
 #'
 #' @export
 theme_timeline_with_y_axis_text <- ggplot2::theme(

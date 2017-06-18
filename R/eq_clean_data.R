@@ -25,7 +25,7 @@
 #' @importFrom gtools na.replace
 #' @importFrom dplyr mutate
 #'
-#' @example examples/example_clean_data.R
+#' @example inst/examples/example_clean_data.R
 #'
 #' @export
 eq_clean_data <- function(raw_data) {

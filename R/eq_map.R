@@ -24,7 +24,7 @@
 #' @importFrom leaflet addCircleMarkers
 #' @importFrom stats as.formula
 #'
-#' @example examples/example_mapping_functions.R
+#' @example inst/examples/example_mapping_functions.R
 #'
 #' @seealso \link{leaflet}
 #'

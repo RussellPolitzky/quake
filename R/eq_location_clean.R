@@ -13,7 +13,7 @@
 #' @importFrom stringr str_match
 #' @importFrom stringr str_trim
 #'
-#' @example examples/example_clean_data.R
+#' @example inst/examples/example_clean_data.R
 #'
 #' @export
 eq_location_clean <- function(locations) {

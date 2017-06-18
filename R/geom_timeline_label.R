@@ -24,7 +24,7 @@
 #' @importFrom grid gTree
 #' @importFrom grid gList
 #'
-#' @example examples/example_timeline_label.R
+#' @example inst/examples/example_timeline_label.R
 #'
 #' @export
 GeomTimelineLabel  <- ggplot2::ggproto(
@@ -150,7 +150,7 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' @return a \code{gg ggplot} object representing timeline labels.  This is intended to be
 #' used with \link{geom_timeline}.
 #'
-#' @example examples/example_timeline_label.R
+#' @example inst/examples/example_timeline_label.R
 #
 #' @export
 geom_timeline_label <- function(mapping     = NULL       , data          = NULL , stat        = "identity",

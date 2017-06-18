@@ -25,7 +25,7 @@
 #' @importFrom grid gList
 #' @importFrom grid gpar
 #'
-#' @example examples/example_timeline_label.R
+#' @example inst/examples/example_timeline_label.R
 #'
 #' @export
 GeomTimeline <- ggplot2::ggproto(
@@ -127,7 +127,7 @@ GeomTimeline <- ggplot2::ggproto(
 #'
 #' @importFrom ggplot2 layer
 #'
-#' @example examples/example_timeline_label.R
+#' @example inst/examples/example_timeline_label.R
 #'
 #' @export
 geom_timeline <- function(mapping     = NULL,       data        = NULL, stat = "identity",
