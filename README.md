@@ -53,26 +53,24 @@ Generate sample data:
 library(magrittr)
 library(quake)
 library(ggplot2)
+library(data.table)
 
-n         <- 100
-countries <- c("USA", "China", "India", "South Africa")
+n        <- 100 # no samples
+# get a list of countries and cities.
+cty_file <- system.file("extdata", "countries_cities.csv", package = "quake")
+ctry_cty <- (fread(cty_file))[sample(1:.N, size = n, replace = TRUE), ]
 
 # Sample data
-dt <- data.frame(
+dt <- data.table(
   date      = as.Date('2017-01-01') + seq(1, 365, 365/n),
-  country   = factor(sample(countries, replace = TRUE, size = n)),
-  location  = sample(LETTERS, n, replace = TRUE),
+  country   = factor(ctry_cty$Country),
+  location  = factor(ctry_cty$City   ),
   intensity = runif(n)*10,
   deaths    = runif(n)*12
 )
 ```
 
-Plot the sample data with
-
--   date on the x axis,
--   country on the y axis,
--   quake magnitude shown using marker size,
--   the number of associated deaths indicated by colour
+Plot the sample data with: \* date on the x axis, \* country on the y axis, \* quake magnitude shown using marker size, \* the number of associated deaths indicated by colour
 
 ``` r
 dt %>%
@@ -93,21 +91,21 @@ dt %>%
   theme_timeline_with_y_axis_text
 ```
 
-![](README-plot_data-1.png) Notice `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package, the other being `theme_timeline`, which turns off y-axis text.
+![](README-plot_data-1.png) Notice `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package, the other being `theme_timeline`, which turns off all y-axis graphics inclusing the text.
 
-Also notice that by adding `y = country`, a timeline, separated by country is produce. Without this, optional aesthetic, all quakes will be plotted on a single line.
+Also notice that by adding `y = country`, a timeline, separated by country, is produceb. Without this optional aesthetic, all quakes will be plotted on a single timeline.
 
 Adding Labels to A Quake Timeline
 ---------------------------------
 
-The example above shows a timeline without labels. That is, the timeline doesn't shown the actual locations at which the quakes happened. The `geom_timeline_label` solves this problem.
+The example above shows a timeline without labels. That is, the timeline doesn't show the actual locations at which the quakes happened. The `geom_timeline_label` solves this problem.
 
-The example below shows a timeline, plotting the same data, but with labels.
+The example below shows a timeline, plotting the same data, but with labels added by `geom_timeline_label`.
 
 ``` r
 dt %>%
   ggplot() +
-  geom_timeline(
+  geom_timeline(       # plot the timeline
     aes(
       x    = date, 
       y    = country, 
@@ -116,14 +114,14 @@ dt %>%
     ), 
     alpha = 0.8
   ) + 
-  geom_timeline_label(
+  geom_timeline_label( # add labels.
     aes(
-      label = location ,
-      x     = date     ,
-      y     = country  ,
-      size  = intensity
+      label = location , # label text
+      x     = date     , # x location
+      y     = country  , # level to add label at 
+      size  = intensity  #
     ),
-    n_max = 10
+    n_max = 5 # only label 5 most intense quakes
   ) +
   labs(x = "DATE")                                     +
   scale_size_continuous (name = "Richter scale value") +
@@ -136,3 +134,24 @@ dt %>%
 
 Mapping Quakes
 --------------
+
+`quake` also aids visualization by plotting earthquake locations on a map. The code below: \* reads NOAA data, \* cleans it, \* filters for Mexico, \* adds popup text lables using the `eq_create_label` function and \* creates an interactive map with these labels.
+
+``` r
+library(quake)
+library(readr)
+library(dplyr)
+library(lubridate)
+
+data_file_name <- system.file("extdata", "earthquakes.tsv.gz", package = "quake")
+
+read_delim(data_file_name, delim = "\t") %>%
+  eq_clean_data()                                       %>%
+  filter(COUNTRY == "MEXICO" & year(date) >= 2000)      %>%
+  mutate(popup_text = eq_create_label(.))               %>%
+  eq_map(annot_col = "popup_text")
+```
+
+The image below shows sample output, after clicking on one of the quake locations to show it's pop-up detail.
+
+![Sample Plot](./SampleMap.png)
