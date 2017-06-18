@@ -27,7 +27,6 @@
 #'
 #' @example inst/examples/example_timeline_label.R
 #'
-#' @export
 GeomTimeline <- ggplot2::ggproto(
   "GeomTimeline",
 

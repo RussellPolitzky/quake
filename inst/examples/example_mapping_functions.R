@@ -1,4 +1,3 @@
-# Example with dplyr
 library(quake)
 library(readr)
 library(dplyr)

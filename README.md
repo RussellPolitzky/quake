@@ -3,8 +3,8 @@
 <!-- * Turn on travis for this repo at https://travis-ci.org/profile -->
 <!--  * Add a travis shield to your README.md: -->
 <!-- [![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/) -->
-The Quake Package
-=================
+Quake Package
+=============
 
 The `quake` package visualizes [NOAA earthquake data](https://ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1). `quake` shows when earthquakes happened on a labelled timeline, and where they happened on an interactive map.
 
