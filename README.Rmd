@@ -73,16 +73,20 @@ library(magrittr)
 library(quake)
 library(ggplot2)
 
-n         <- 100
-countries <- c("USA", "China", "India", "South Africa")
+n         <- 100 # no samples
+
+cty_file <- system.file("extdata", "countries_cities.csv", package = "quake")
+ctry_cty <- (fread(cty_file))[sample(1:.N, size = n, replace = TRUE), ]
 
 # Sample data
 dt <- data.frame(
   date      = as.Date('2017-01-01') + seq(1, 365, 365/n),
-  country   = factor(sample(countries, replace = TRUE, size = n)),
+  country   = factor(ctry_cty$Country),
+  location  = factor(ctry_cty$City   ),
   intensity = runif(n)*10,
   deaths    = runif(n)*12
 )
+
 ```
 Plot the sample data with 
 
@@ -109,11 +113,51 @@ dt %>%
   theme_classic()                                      +
   theme_timeline_with_y_axis_text
 ```
-Note `theme_timeline_with_y_axis_text` theme add-on, which is 
-one of two themes provided by the `quake` package.
+Notice `theme_timeline_with_y_axis_text` theme add-on, which is 
+one of two themes provided by the `quake` package, the other being
+`theme_timeline`, which turns off y-axis text.
+
+Also notice that by adding `y = country`, a timeline, separated
+by country is produce.  Without this, optional aesthetic, all 
+quakes will be plotted on a single line.
 
 ## Adding Labels to A Quake Timeline
 
+The example above shows a timeline without labels.  That is, 
+the timeline doesn't shown the actual locations at which 
+the quakes happened.  The `geom_timeline_label` solves
+this problem.
+
+The example below shows a timeline, plotting the same 
+data, but with labels.
+
+```{r plot_data_labels}
+dt %>%
+  ggplot() +
+  geom_timeline(
+    aes(
+      x    = date, 
+      y    = country, 
+      size = intensity, 
+      col  = deaths
+    ), 
+    alpha = 0.8
+  ) + 
+  geom_timeline_label(
+    aes(
+      label = location ,
+      x     = date     ,
+      y     = country  ,
+      size  = intensity
+    ),
+    n_max = 10
+  ) +
+  labs(x = "DATE")                                     +
+  scale_size_continuous (name = "Richter scale value") +
+  scale_color_continuous(name = "# deaths"           ) +
+  theme_classic()                                      +
+  theme_timeline_with_y_axis_text
+```
 
 ## Mapping Quakes
 

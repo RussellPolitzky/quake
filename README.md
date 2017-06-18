@@ -61,6 +61,7 @@ countries <- c("USA", "China", "India", "South Africa")
 dt <- data.frame(
   date      = as.Date('2017-01-01') + seq(1, 365, 365/n),
   country   = factor(sample(countries, replace = TRUE, size = n)),
+  location  = sample(LETTERS, n, replace = TRUE),
   intensity = runif(n)*10,
   deaths    = runif(n)*12
 )
@@ -92,10 +93,46 @@ dt %>%
   theme_timeline_with_y_axis_text
 ```
 
-![](README-plot_data-1.png) Note `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package.
+![](README-plot_data-1.png) Notice `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package, the other being `theme_timeline`, which turns off y-axis text.
+
+Also notice that by adding `y = country`, a timeline, separated by country is produce. Without this, optional aesthetic, all quakes will be plotted on a single line.
 
 Adding Labels to A Quake Timeline
 ---------------------------------
+
+The example above shows a timeline without labels. That is, the timeline doesn't shown the actual locations at which the quakes happened. The `geom_timeline_label` solves this problem.
+
+The example below shows a timeline, plotting the same data, but with labels.
+
+``` r
+dt %>%
+  ggplot() +
+  geom_timeline(
+    aes(
+      x    = date, 
+      y    = country, 
+      size = intensity, 
+      col  = deaths
+    ), 
+    alpha = 0.8
+  ) + 
+  geom_timeline_label(
+    aes(
+      label = location ,
+      x     = date     ,
+      y     = country  ,
+      size  = intensity
+    ),
+    n_max = 10
+  ) +
+  labs(x = "DATE")                                     +
+  scale_size_continuous (name = "Richter scale value") +
+  scale_color_continuous(name = "# deaths"           ) +
+  theme_classic()                                      +
+  theme_timeline_with_y_axis_text
+```
+
+![](README-plot_data_labels-1.png)
 
 Mapping Quakes
 --------------
