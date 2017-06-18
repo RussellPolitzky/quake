@@ -22,40 +22,77 @@ Cleaning Data
 
 NOAA data is supplied without a consolidate date column and given locations includes countr, as well as province and city. As such, the `eq_clean_data` function adds a `date` column and one for `clean_location`.
 
-In the example, below, tab separated NOAA data is read using the `data.table`'s `fread` function, and then cleaned using `eq_clean_data`. Sample output is shown below.
+In the example, below, tab separated NOAA data is read using the `data.table`'s `fread` function, and then cleaned using `eq_clean_data` is shown below.
+
+The code below reads a sample file using `data.table's` `fread` function and cleans it using `eq_clean_data`. The sample shows the first three rows and columns 1-5, and 48-49 of the cleaned output.
 
 ``` r
 library(data.table)
 library(magrittr)
 library(quake)
-library(DT)
 
 data_file_name <- system.file("extdata", "earthquakes.tsv", package = "quake")
 clean_data     <- fread(data_file_name) %>% eq_clean_data
-datatable(head(clean_data))
+clean_data[1:3, c(1:5, 48:49)] # show 1st three rows and cols 1-5 and 48-49
+#>   I_D FLAG_TSUNAMI  YEAR MONTH DAY        date       clean_location
+#> 1   1              -2150     1   1 -2150-01-01 BAB-A-DARAA,AL-KARAK
+#> 2   2          Tsu -2000     1   1 -2000-01-01               UGARIT
+#> 3   3              -2000     1   1 -2000-01-01                    W
 ```
 
-<!--html_preserve-->
+Plotting an Earthquake Timeline
+-------------------------------
 
-<script type="application/json" data-for="htmlwidget-dcd8603ff9278607cfb8">{"x":{"filter":"none","data":[["1","2","3","4","5","6"],[1,2,3,5877,8,11],["","Tsu","","Tsu","",""],[-2150,-2000,-2000,-1610,-1566,-1450],[1,1,1,1,1,1],[1,1,1,1,1,1],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[null,null,18,null,null,null],[7.3,null,7.1,null,null,null],[null,null,null,null,null,null],[null,null,7.1,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[7.3,null,null,null,null,null],[null,10,10,null,10,10],["JORDAN","SYRIA","TURKMENISTAN","GREECE","ISRAEL","ITALY"],["","","","","",""],["JORDAN:  BAB-A-DARAA,AL-KARAK","SYRIA:  UGARIT","TURKMENISTAN:  W","GREECE:  THERA ISLAND (SANTORINI)","ISRAEL:  ARIHA (JERICHO)","ITALY:  LACUS CIMINI"],[31.1,35.683,38,36.4,31.5,35.5],[35.5,35.8,58.2,25.4,35.3,25.5],[140,130,40,130,140,130],[null,null,1,null,null,null],[null,3,1,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[3,null,1,null,3,null],[null,null,null,null,null,null],[null,null,1,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,1,null,null,null],[null,3,1,3,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],[null,null,1,3,null,null],[null,null,null,null,null,null],[null,null,1,null,null,null],[null,null,null,null,null,null],[null,null,null,null,null,null],["-2150-01-01","-2000-01-01","-2000-01-01","-1610-01-01","-1566-01-01","-1450-01-01"],["BAB-A-DARAA,AL-KARAK","UGARIT","W","THERA ISLAND (SANTORINI)","ARIHA (JERICHO)","LACUS CIMINI"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>I_D<\/th>\n      <th>FLAG_TSUNAMI<\/th>\n      <th>YEAR<\/th>\n      <th>MONTH<\/th>\n      <th>DAY<\/th>\n      <th>HOUR<\/th>\n      <th>MINUTE<\/th>\n      <th>SECOND<\/th>\n      <th>FOCAL_DEPTH<\/th>\n      <th>EQ_PRIMARY<\/th>\n      <th>EQ_MAG_MW<\/th>\n      <th>EQ_MAG_MS<\/th>\n      <th>EQ_MAG_MB<\/th>\n      <th>EQ_MAG_ML<\/th>\n      <th>EQ_MAG_MFA<\/th>\n      <th>EQ_MAG_UNK<\/th>\n      <th>INTENSITY<\/th>\n      <th>COUNTRY<\/th>\n      <th>STATE<\/th>\n      <th>LOCATION_NAME<\/th>\n      <th>LATITUDE<\/th>\n      <th>LONGITUDE<\/th>\n      <th>REGION_CODE<\/th>\n      <th>DEATHS<\/th>\n      <th>DEATHS_DESCRIPTION<\/th>\n      <th>MISSING<\/th>\n      <th>MISSING_DESCRIPTION<\/th>\n      <th>INJURIES<\/th>\n      <th>INJURIES_DESCRIPTION<\/th>\n      <th>DAMAGE_MILLIONS_DOLLARS<\/th>\n      <th>DAMAGE_DESCRIPTION<\/th>\n      <th>HOUSES_DESTROYED<\/th>\n      <th>HOUSES_DESTROYED_DESCRIPTION<\/th>\n      <th>HOUSES_DAMAGED<\/th>\n      <th>HOUSES_DAMAGED_DESCRIPTION<\/th>\n      <th>TOTAL_DEATHS<\/th>\n      <th>TOTAL_DEATHS_DESCRIPTION<\/th>\n      <th>TOTAL_MISSING<\/th>\n      <th>TOTAL_MISSING_DESCRIPTION<\/th>\n      <th>TOTAL_INJURIES<\/th>\n      <th>TOTAL_INJURIES_DESCRIPTION<\/th>\n      <th>TOTAL_DAMAGE_MILLIONS_DOLLARS<\/th>\n      <th>TOTAL_DAMAGE_DESCRIPTION<\/th>\n      <th>TOTAL_HOUSES_DESTROYED<\/th>\n      <th>TOTAL_HOUSES_DESTROYED_DESCRIPTION<\/th>\n      <th>TOTAL_HOUSES_DAMAGED<\/th>\n      <th>TOTAL_HOUSES_DAMAGED_DESCRIPTION<\/th>\n      <th>date<\/th>\n      <th>clean_location<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
-<!--/html_preserve-->
-' @description  takes a NOAA data frame and returns a cleaned
-============================================================
+`quake` has two custom, `ggplot2` geometries to plot earthquake data. `geom_timeline` plots timelines while `geom_timeline_label` add labels to a timeline.
 
-' . The clean  has
-=================
+The example code below generates sample data and plots a timeline showing the dates, magnitudes and countries of the quakes.
 
-' a date column, of type , created by uniting the year, month,
-==============================================================
+Generate sample data:
 
-' day columns from the raw data. The  and 
-=========================================
+``` r
+library(magrittr)
+library(quake)
+library(ggplot2)
 
-' are converted to s.
-=====================
+n         <- 100
+countries <- c("USA", "China", "India", "South Africa")
 
-Plotting a Quake Timeline
--------------------------
+# Sample data
+dt <- data.frame(
+  date      = as.Date('2017-01-01') + seq(1, 365, 365/n),
+  country   = factor(sample(countries, replace = TRUE, size = n)),
+  intensity = runif(n)*10,
+  deaths    = runif(n)*12
+)
+```
+
+Plot the sample data with
+
+-   date on the x axis,
+-   country on the y axis,
+-   quake magnitude shown using marker size,
+-   the number of associated deaths indicated by colour
+
+``` r
+dt %>%
+  ggplot() +
+  geom_timeline(
+    aes(
+      x    = date, 
+      y    = country, 
+      size = intensity, 
+      col  = deaths
+    ), 
+    alpha = 0.8
+  ) +
+  labs(x = "DATE")                                     +
+  scale_size_continuous (name = "Richter scale value") +
+  scale_color_continuous(name = "# deaths"           ) +
+  theme_classic()                                      +
+  theme_timeline_with_y_axis_text
+```
+
+![](README-plot_data-1.png) Note `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package.
 
 Adding Labels to A Quake Timeline
 ---------------------------------
