@@ -29,7 +29,6 @@ magnitude in the \code{LATTITUDE}, \code{LONGITUDE} and \code{EQ_PRIMARY}
 columns, respectively.
 }
 \examples{
-# Example with dplyr
 library(quake)
 library(readr)
 library(dplyr)

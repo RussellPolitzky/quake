@@ -21,7 +21,6 @@ a vector of \code{string}s with HTML encoded labels showing the location,
 magnitude and total, associated deaths caused the each quake.
 }
 \examples{
-# Example with dplyr
 library(quake)
 library(readr)
 library(dplyr)
