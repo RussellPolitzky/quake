@@ -1,0 +1,93 @@
+---
+output: github_document
+always_allow_html: yes
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+<!-- * Turn on travis for this repo at https://travis-ci.org/profile -->
+<!--  * Add a travis shield to your README.md: -->
+<!-- [![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/) -->
+
+# The Quake Package
+
+The `quake` package visualizes [NOAA earthquake data](https://ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1).
+`quake` shows when earthquakes happened on a labelled timeline,
+and where they happened on an interactive map.
+
+Two custom, `ggplot2` geometries, `geom_timeline` and `geom_timeline_label`
+make for easy earthquake, timeline plotting and labelling, while 
+function `eq_map` shows earthquake locations.
+
+## Installation
+
+`quake` is available from GitHub and is installed 
+using the `devtools` package as follows:
+
+    devtools::install_github("RussellPolitzky/quake")
+
+## Cleaning Data
+
+NOAA data is supplied without a consolidate date column and given locations
+includes countr, as well as province and city.  As such, the `eq_clean_data`
+function adds a `date` column and one for `clean_location`.
+
+In the example, below, tab separated NOAA data is read using the `data.table`'s
+`fread` function, and then cleaned using `eq_clean_data`.  Sample output
+is shown below.
+
+```{r  results='asis'}
+library(data.table)
+library(magrittr)
+library(quake)
+library(DT)
+
+data_file_name <- system.file("extdata", "earthquakes.tsv", package = "quake")
+clean_data     <- fread(data_file_name) %>% eq_clean_data
+datatable(head(clean_data))
+```
+
+
+
+
+
+#' @description \code{eq_clean_data} takes a NOAA data frame and returns a cleaned
+#' \code{data.frame}.  The clean \code{data.frame} has
+#' a date column, of type \code{Date}, created by uniting the year, month,
+#' day columns from the raw data.  The \code{LATITUDE} and \code{LONGITUDE}
+#' are converted to \code{numeric}s.
+
+
+## Plotting a Quake Timeline
+
+
+## Adding Labels to A Quake Timeline
+
+
+## Mapping Quakes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

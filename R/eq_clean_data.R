@@ -2,7 +2,7 @@
 #' @title Clean earthquake data
 #'
 #' @description \code{eq_clean_data} takes a NOAA data frame and returns a cleaned
-#' \code{data.frame}.  The clean \code{data.table data.frame} has
+#' \code{data.frame}.  The clean \code{data.frame} has
 #' a date column, of type \code{Date}, created by uniting the year, month,
 #' day columns from the raw data.  The \code{LATITUDE} and \code{LONGITUDE}
 #' are converted to \code{numeric}s.
