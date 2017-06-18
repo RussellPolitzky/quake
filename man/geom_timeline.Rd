@@ -35,6 +35,9 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
+\item{na.rm}{a \code{boolean} indicating whether or not to remove NAs.
+\code{na.rm = FALSE} by default.}
+
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.}
@@ -53,6 +56,9 @@ timeline will only show events in the data where \code{x >= xmin}.}
 \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
 aesthetic, since it's specifies the lower bound for it.  That's so say, the
 timeline will only show events in the data where \code{x <= xmin}.}
+
+\item{...}{a \code{...} indicates a list of additional parameters
+use for a geom.  \code{geom_timeline} doesn't make use of these.}
 }
 \value{
 a ggplot2 layer object.

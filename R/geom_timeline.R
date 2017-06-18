@@ -112,11 +112,14 @@ GeomTimeline <- ggplot2::ggproto(
 #' \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
 #' aesthetic, since it's specifies the lower bound for it.  That's so say, the
 #' timeline will only show events in the data where \code{x >= xmin}.
-#'
 #' @param xmax any type coercible to a \code{numeric} without additional parameters.
 #' \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
 #' aesthetic, since it's specifies the lower bound for it.  That's so say, the
 #' timeline will only show events in the data where \code{x <= xmin}.
+#' @param na.rm a \code{boolean} indicating whether or not to remove NAs.
+#' \code{na.rm = FALSE} by default.
+#' @param ... a \code{...} indicates a list of additional parameters
+#' use for a geom.  \code{geom_timeline} doesn't make use of these.
 #'
 #' @return a ggplot2 layer object.
 #'

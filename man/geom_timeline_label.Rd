@@ -2,7 +2,7 @@
 % Please edit documentation in R/geom_timeline_label.R
 \name{geom_timeline_label}
 \alias{geom_timeline_label}
-\title{Add text labels to timelines produced with \link{\code{geom_timeline}}}
+\title{Add text labels to timelines produced with \link{geom_timeline}}
 \usage{
 geom_timeline_label(mapping = NULL, data = NULL, stat = "identity",
   position = "identity", na.rm = FALSE, show.legend = NA,
@@ -36,6 +36,9 @@ layer, as a string.}
 \item{position}{Position adjustment, either as a string, or the result of
 a call to a position adjustment function.}
 
+\item{na.rm}{a \code{boolean} indicating whether or not to remove NAs.
+\code{na.rm = FALSE} by default.}
+
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
 \code{FALSE} never includes, and \code{TRUE} always includes.}
@@ -61,15 +64,27 @@ default.}
 \item{n_max}{is a \code{numeric} giving the maximum number of labels to display.  This
 reduces the number of label collisions in dense, timelime plots.  The labels to show
 are chosen based on the \code{size} aestheic.  Setting \code{n_max} will result
-ina maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.}
+in a maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.}
+
+\item{fill}{a \code{string} colour the fill colour ro be used for labels
+\code{fill = 'black'} by default.}
+
+\item{xmin}{is a \code{numeric} specifiying the minimum \code{x} value to consider.
+\code{xmin = .Machine$double.xmin} by default.}
+
+\item{xmax}{is a \code{numeric} specifiying the maximum \code{x} value to consider.
+\code{xmax = .Machine$double.xmax} by default.}
+
+\item{...}{a \code{...} indicates a list of additional parameters
+use for a geom.  \code{geom_timeline} doesn't make use of these.}
 }
 \value{
 a \code{gg ggplot} object representing timeline labels.  This is intended to be
-used with \link{\code{geom_timeline}}.
+used with \link{geom_timeline}.
 }
 \description{
 \code{geom_timeline_label} adds annotations to earthquake data
-timelines produced with \link{\code{geom_timeline}}. This geom adds a vertical
+timelines produced with \link{geom_timeline}. This geom adds a vertical
 line to each data point with a text annotation (e.g. the location of an
 earthquake) attached atop to each line.
 \code{geom_timeline_label} provides an option to subset to \code{n_max} number
@@ -81,5 +96,5 @@ This geometry supports the following aesthetics
 }
 }
 \examples{
-/example_timeline_plot.R
+/example_timeline_label.R
 }

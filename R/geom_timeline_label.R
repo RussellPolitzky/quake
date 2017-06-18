@@ -108,10 +108,10 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 )
 
 #' @md
-#' @title Add text labels to timelines produced with \link{\code{geom_timeline}}
+#' @title Add text labels to timelines produced with \link{geom_timeline}
 #'
 #' @description \code{geom_timeline_label} adds annotations to earthquake data
-#' timelines produced with \link{\code{geom_timeline}}. This geom adds a vertical
+#' timelines produced with \link{geom_timeline}. This geom adds a vertical
 #' line to each data point with a text annotation (e.g. the location of an
 #' earthquake) attached atop to each line.
 #' \code{geom_timeline_label} provides an option to subset to \code{n_max} number
@@ -136,9 +136,19 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' in a maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.
 #' @param labelcolour is a \code{string} giving the label colour.  This is set to 'black' by
 #' default.
+#' @param na.rm a \code{boolean} indicating whether or not to remove NAs.
+#' \code{na.rm = FALSE} by default.
+#' @param fill a \code{string} colour the fill colour ro be used for labels
+#' \code{fill = 'black'} by default.
+#' @param xmin is a \code{numeric} specifiying the minimum \code{x} value to consider.
+#' \code{xmin = .Machine$double.xmin} by default.
+#' @param xmax is a \code{numeric} specifiying the maximum \code{x} value to consider.
+#' \code{xmax = .Machine$double.xmax} by default.
+#' @param ... a \code{...} indicates a list of additional parameters
+#' use for a geom.  \code{geom_timeline} doesn't make use of these.
 #'
 #' @return a \code{gg ggplot} object representing timeline labels.  This is intended to be
-#' used with \link{\code{geom_timeline}}.
+#' used with \link{geom_timeline}.
 #'
 #' @examples/example_timeline_label.R
 #

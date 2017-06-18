@@ -4,7 +4,9 @@ library(readr)
 library(dplyr)
 library(lubridate)
 
-read_delim("examples/earthquakes.tsv.gz", delim = "\t") %>%
+data_file_name <- system.file("extdata", "earthquakes.tsv.gz", package = "quake")
+
+read_delim(data_file_name, delim = "\t") %>%
   eq_clean_data()                                       %>%
   filter(COUNTRY == "MEXICO" & year(date) >= 2000)      %>%
   mutate(popup_text = eq_create_label(.))               %>%
