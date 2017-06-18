@@ -95,8 +95,8 @@ dt %>%
 
 Also notice that by adding `y = country`, a timeline, separated by country, is produceb. Without this optional aesthetic, all quakes will be plotted on a single timeline.
 
-Adding Labels to A Quake Timeline
----------------------------------
+Adding Labels to An Earthquake Timeline
+---------------------------------------
 
 The example above shows a timeline without labels. That is, the timeline doesn't show the actual locations at which the quakes happened. The `geom_timeline_label` solves this problem.
 
