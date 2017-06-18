@@ -23,7 +23,7 @@ library(data.table)
 library(magrittr)
 library(quake)
 
-data_file  <- system.file("extdata", "earthquakes.tsv", package = "quake")
-clean_data <- fread(data_file) \%>\% eq_clean_data
+data_file_name <- system.file("extdata", "earthquakes.tsv", package = "quake")
+clean_data     <- fread(data_file_name) \%>\% eq_clean_data
 clean_data
 }

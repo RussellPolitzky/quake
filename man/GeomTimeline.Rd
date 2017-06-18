@@ -30,7 +30,7 @@ countries <- c("USA", "China", "India", "South Africa")
 
 dt <- data.table(
   date      = as.Date('2017-01-01') + seq(1, 365, 365/n),
-  country   = factor(sample(countries, replace = T, size = n)),
+  country   = factor(sample(countries, replace = TRUE, size = n)),
   intensity = runif(n)*10, # mag is somewhere beteen 0 and 10
   deaths    = runif(n)*12
 )

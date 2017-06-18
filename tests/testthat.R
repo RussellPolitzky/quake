@@ -1,4 +1,4 @@
 library(testthat)
-library(rcapstone)
+library(quake)
 
-test_check("rcapstone")
+test_check("quake")

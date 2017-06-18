@@ -150,7 +150,7 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' @return a \code{gg ggplot} object representing timeline labels.  This is intended to be
 #' used with \link{geom_timeline}.
 #'
-#' @examples/example_timeline_label.R
+#' @example examples/example_timeline_label.R
 #
 #' @export
 geom_timeline_label <- function(mapping     = NULL       , data          = NULL , stat        = "identity",
