@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-
 <!-- * Turn on travis for this repo at https://travis-ci.org/profile -->
 <!--  * Add a travis shield to your README.md: -->
 <!-- [![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/) -->
@@ -187,20 +186,5 @@ read_delim(data_file_name, delim = "\t") %>%
 The image below shows sample output, after clicking on one of the 
 quake locations to show it's pop-up detail.
 
+<!-- Had to hack this url to get it to work on git-hub. -->
 ![Sample Map](https://raw.githubusercontent.com/RussellPolitzky/quake/master/SampleMap.PNG)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
