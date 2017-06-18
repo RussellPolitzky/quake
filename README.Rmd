@@ -187,7 +187,9 @@ read_delim(data_file_name, delim = "\t") %>%
 The image below shows sample output, after clicking on one of the 
 quake locations to show it's pop-up detail.
 
-![Sample Plot](SampleMap.png)
+![](SampleMap.png)
+
+
 
 
 
