@@ -154,4 +154,4 @@ read_delim(data_file_name, delim = "\t") %>%
 
 The image below shows sample output, after clicking on one of the quake locations to show it's pop-up detail.
 
-![](SampleMap.png)
+![Sample Map](https://raw.githubusercontent.com/RussellPolitzky/quake/master/SampleMap.PNG)
