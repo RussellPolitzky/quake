@@ -12,11 +12,10 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-<!-- * Turn on travis for this repo at https://travis-ci.org/profile -->
-<!--  * Add a travis shield to your README.md: -->
-<!-- [![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/) -->
-
 # Quake Package
+
+| Current Travis Build Status | [![Travis-CI Build Status](https://travis-ci.org/RussellPolitzky/quake.svg?branch=master)](https://travis-ci.org/RussellPolitzky/quake) |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 
 The `quake` package visualizes [NOAA earthquake data](https://ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1).
 `quake` shows when earthquakes happened on a labelled timeline,
@@ -99,11 +98,11 @@ dt %>%
   ggplot() +
   geom_timeline(
     aes(
-      x    = date, 
-      y    = country, 
-      size = intensity, 
+      x    = date,
+      y    = country,
+      size = intensity,
       col  = deaths
-    ), 
+    ),
     alpha = 0.8
   ) +
   labs(x = "DATE")                                     +
@@ -112,23 +111,23 @@ dt %>%
   theme_classic()                                      +
   theme_timeline_with_y_axis_text
 ```
-Notice `theme_timeline_with_y_axis_text` theme add-on, which is 
+Notice `theme_timeline_with_y_axis_text` theme add-on, which is
 one of two themes provided by the `quake` package, the other being
 `theme_timeline`, which turns off all y-axis graphics inclusing
 the text.
 
 Also notice that by adding `y = country`, a timeline, separated
-by country, is produceb.  Without this optional aesthetic, all 
-quakes will be plotted on a single timeline.
+by country, is produceb.  Without this optional aesthetic, all
+quakes will be plotted in a single timeline.
 
-## Adding Labels to An Earthquake Timeline
+## Adding labels to An Earthquake Timeline
 
-The example above shows a timeline without labels.  That is, 
-the timeline doesn't show the actual locations at which 
+The example above shows a timeline without labels.  That is,
+the timeline doesn't show the actual locations at which
 the quakes happened.  The `geom_timeline_label` solves
 this problem.
 
-The example below shows a timeline, plotting the same 
+The example below shows a timeline, plotting the same
 data, but with labels added by `geom_timeline_label`.
 
 ```{r plot_data_labels}

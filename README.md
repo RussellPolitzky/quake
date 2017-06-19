@@ -1,10 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- * Turn on travis for this repo at https://travis-ci.org/profile -->
-<!--  * Add a travis shield to your README.md: -->
-<!-- [![Travis-CI Build Status](https://travis-ci.org/.svg?branch=master)](https://travis-ci.org/) -->
 Quake Package
 =============
+
+| Current Travis Build Status | [![Travis-CI Build Status](https://travis-ci.org/RussellPolitzky/quake.svg?branch=master)](https://travis-ci.org/RussellPolitzky/quake) |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 
 The `quake` package visualizes [NOAA earthquake data](https://ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1). `quake` shows when earthquakes happened on a labelled timeline, and where they happened on an interactive map.
 
@@ -154,4 +154,5 @@ read_delim(data_file_name, delim = "\t") %>%
 
 The image below shows sample output, after clicking on one of the quake locations to show it's pop-up detail.
 
+<!-- Had to hack this url to get it to work on git-hub. -->
 ![Sample Map](https://raw.githubusercontent.com/RussellPolitzky/quake/master/SampleMap.PNG)
