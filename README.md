@@ -77,11 +77,11 @@ dt %>%
   ggplot() +
   geom_timeline(
     aes(
-      x    = date, 
-      y    = country, 
-      size = intensity, 
+      x    = date,
+      y    = country,
+      size = intensity,
       col  = deaths
-    ), 
+    ),
     alpha = 0.8
   ) +
   labs(x = "DATE")                                     +
@@ -93,9 +93,9 @@ dt %>%
 
 ![](README-plot_data-1.png) Notice `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package, the other being `theme_timeline`, which turns off all y-axis graphics inclusing the text.
 
-Also notice that by adding `y = country`, a timeline, separated by country, is produceb. Without this optional aesthetic, all quakes will be plotted on a single timeline.
+Also notice that by adding `y = country`, a timeline, separated by country, is produceb. Without this optional aesthetic, all quakes will be plotted in a single timeline.
 
-Adding Labels to An Earthquake Timeline
+Adding labels to An Earthquake Timeline
 ---------------------------------------
 
 The example above shows a timeline without labels. That is, the timeline doesn't show the actual locations at which the quakes happened. The `geom_timeline_label` solves this problem.
@@ -154,5 +154,4 @@ read_delim(data_file_name, delim = "\t") %>%
 
 The image below shows sample output, after clicking on one of the quake locations to show it's pop-up detail.
 
-<!-- Had to hack this url to get it to work on git-hub. -->
-![Sample Map](https://raw.githubusercontent.com/RussellPolitzky/quake/master/SampleMap.PNG)
+![Sample Map](README-SampleMap.PNG)

@@ -185,5 +185,4 @@ read_delim(data_file_name, delim = "\t") %>%
 The image below shows sample output, after clicking on one of the 
 quake locations to show it's pop-up detail.
 
-<!-- Had to hack this url to get it to work on git-hub. -->
-![Sample Map](https://raw.githubusercontent.com/RussellPolitzky/quake/master/README-SampleMap.PNG)
+![Sample Map](README-SampleMap.PNG)
