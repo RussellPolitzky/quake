@@ -117,8 +117,8 @@ dt <- data.table(
 ```
 The sample data `head`'s shown below.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(dt))  # show 1st three rows and cols 1-5 and 48-49
+```{r, echo=FALSE, result='asis'}
+knitr::kable(head(dt))
 ```
 
 ### Plot the sample data
