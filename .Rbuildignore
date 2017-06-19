@@ -8,3 +8,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
+^\..*\.PNG          # Don't include images from the readme.rmd in the build
