@@ -146,7 +146,7 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' @param ... a \code{...} indicates a list of additional parameters
 #' use for a geom.  \code{geom_timeline} doesn't make use of these.
 #'
-#' @return a \code{gg ggplot} object representing timeline labels.  This is intended to be
+#' @return a \code{ggplot} object representing timeline labels.  This is intended to be
 #' used with \link{geom_timeline}.
 #'
 #' @example inst/examples/example_timeline_label.R

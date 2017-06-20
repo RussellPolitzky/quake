@@ -2,7 +2,7 @@
 % Please edit documentation in R/eq_location_clean.R
 \name{eq_location_clean}
 \alias{eq_location_clean}
-\title{Clean earthuqake locations}
+\title{Clean earthquake locations}
 \usage{
 eq_location_clean(locations)
 }

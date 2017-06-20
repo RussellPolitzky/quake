@@ -1,4 +1,4 @@
-#' @title Clean earthuqake locations
+#' @title Clean earthquake locations
 #'
 #' @description \code{eq_location_clean} cleans the strings in the \code{LOCATION_NAME} column
 #' of the supplied NOAA \code{data.frame}. \code{eq_location_clean} strippsout the country

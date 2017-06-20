@@ -1,4 +1,4 @@
-#' @title Show Eqarthquoakes on a map with annotations
+#' @title Show Earthquakes on a map with annotations
 #'
 #' @description \code{eq_map} takes a \code{data.frame} and with NOAA
 #' earthquake data and plots those on an interactive map, along with

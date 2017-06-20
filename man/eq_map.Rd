@@ -2,7 +2,7 @@
 % Please edit documentation in R/eq_map.R
 \name{eq_map}
 \alias{eq_map}
-\title{Show Eqarthquoakes on a map with annotations}
+\title{Show Earthquakes on a map with annotations}
 \usage{
 eq_map(data, annot_col)
 }

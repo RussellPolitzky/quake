@@ -79,7 +79,7 @@ in a maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being
 use for a geom.  \code{geom_timeline} doesn't make use of these.}
 }
 \value{
-a \code{gg ggplot} object representing timeline labels.  This is intended to be
+a \code{ggplot} object representing timeline labels.  This is intended to be
 used with \link{geom_timeline}.
 }
 \description{
