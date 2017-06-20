@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r echo=FALSE}
+library(htmlTable)
+```
+
 ## Introduction
 
 `quake` provides functions to clean and visualize [NOAA](https://ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1) data.
@@ -61,7 +65,7 @@ clean_data     <- fread(data_file_name) %>% eq_clean_data
 Rows 1-3 and columns 1-5 and 48-49 of the cleaned data are shown below.
 
 ```{r bits_of_clean_data}
-clean_data[1:3, c(1:5, 48:49)]  # show 1st three rows and cols 1-5 and 48-49
+htmlTable(x = clean_data[1:3, c(1:5, 48:49)]) # show 1st three rows and cols 1-5 and 48-49
 ```
 
 `eq_clean_data` uses function `eq_location_clean`, which is also exposed 
@@ -79,8 +83,13 @@ clean_locations <- fread(data_file_name)[, LOCATION_NAME] %>% eq_location_clean
 ```
 The first few cleaned locations are shown below.
 
-```{r head_locations}
-head(clean_locations)  # show 1st three rows and cols 1-5 and 48-49
+```{r head_locations, echo = FALSE}
+htmlTable(
+  x = data.frame(
+    "Cleaned Location" = head(clean_locations)
+  ),
+  align = "l"
+) # show 1st three rows and cols 1-5 and 48-49
 ```
 
 ## Plotting an Earthquake Timeline
@@ -117,8 +126,8 @@ dt <- data.table(
 ```
 The sample data `head`'s shown below.
 
-```{r head_dt}
-head(dt)
+```{r head_dt, echo = FALSE}
+htmlTable(x = head(dt))
 ```
 
 ### Plot the sample data
