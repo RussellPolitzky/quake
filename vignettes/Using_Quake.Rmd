@@ -22,25 +22,25 @@ Timelines make use a number of aesthetics to show:
 - the time at which each quake happened (x position on the timeline) and
 - indicate the magnitude of each quake by the size of the marker used and
 - indicate the number of associated deaths by the colour of the marker and
-- indicate the country or region in which the quake ocurred by grouping
+- indicate the country or region in which the quake occurred by grouping
   these together on the y axis and,
 - indicate the city/town where a quake occurred using labels pointing to the
   associated marker and,
 - use transparency to indicate the degree of clustering in time, of earthquakes.
 
-`quake` provides two custom `ggplot2` geometries to achieve this.
+`quake` provides two custom `ggplot2` geometries to render timelines.
   
-Maps show the positions of earthquakes and 
+Maps show the positions of earthquakes.  They also:
 
-- indicate magnitude by marker size and
+- indicate quake magnitude by marker size and
 - show the location, magnitude and total, associated deaths by way of
-  clickable pop-ups.
+  click-able pop-ups.
 
 `quake` wraps functionality from the [leaflet](https://rstudio.github.io/leaflet/)
  package to achieve this.
 
 The examples below show typical usage of all the functions exported 
-by `quake`. Additional detail on each function is avavilable in the 
+by `quake`. Additional detail on each function is available in the 
 API documentation.
 
 ## Cleaning NOAA Data
@@ -58,7 +58,7 @@ data_file_name <- system.file("extdata", "earthquakes.tsv", package = "quake")
 clean_data     <- fread(data_file_name) %>% eq_clean_data
 
 ```
-Rows 1-3 and columns 1-5 and 48-49 of the cleaned data are shown below.
+Rows 1-3 and columns 1-5 and 48-49 of the cleaned data is given below.
 
 ```{r bits_of_clean_data}
 clean_data[1:3, c(1:5, 48:49)]  # show 1st three rows and cols 1-5 and 48-49
@@ -86,12 +86,12 @@ head(clean_locations)  # show 1st three rows and cols 1-5 and 48-49
 ## Plotting an Earthquake Timeline
 
 `quake` has two custom, `ggplot2` geometries to plot earthquake data.
-`geom_timeline` plots timelines while `geom_timeline_label` add 
-labels to a timeline.
+`geom_timeline` plots timelines while `geom_timeline_label` adds 
+labels to timelines.
 
 The example code below generates sample data and plots 
-a timeline showing the dates, magnitudes and countries of the 
-quakes.
+a timeline showing the dates, magnitudes and countries of each 
+quake.
 
 ### Generate sample data
 
@@ -152,14 +152,14 @@ one of two themes provided by the `quake` package, the other being
 `theme_timeline`, which turns off all y-axis graphics including
 the text.
 
-Also notice that by adding `y = country`, a timeline, separated
-by country, is produced.  Without this optional aesthetic, all 
+Also notice that by adding `y = country`, timelines, grouped
+by country, are produced.  Without this optional aesthetic, all 
 quakes will be plotted on a single timeline.
 
 ### Plot sample data without y axis
 
-Here's the same plot with all quakes shown on one timeline, and 
-without any y-axis decorations.
+This is the same plot, as above, with all quakes shown on a single timeline, 
+and without any y-axis decorations.
 
 ```{r plot_data_no_y_axis, , fig.width = 7}
 dt %>%
@@ -186,7 +186,7 @@ Note that in this example, no `y` aesthetic was used and that as such,
 
 The example above shows a timeline without labels.  That is, 
 the timeline doesn't indicate the actual locations at which 
-the quakes happened.  The `geom_timeline_label` solves
+the quakes happened.  The `geom_timeline_label` addresses
 this problem.
 
 The example below shows a timeline, plotting the same 
@@ -222,8 +222,7 @@ dt %>%
 
 ## Locating Quakes on a Map
 
-`quake` also maps NOAA data making it easy to identify fault lines.
-
+`quake` also maps NOAA data making it easy to identify fault lines, for example.
 
 ```{r map_quakes, fig.width = 7, message = FALSE, warning = FALSE}
 library(readr)
