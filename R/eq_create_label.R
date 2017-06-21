@@ -1,13 +1,13 @@
-#' @title Create an HTML pop-up label showing location, magnitude and total_deaths
+#' @title Create an HTML pop-up label showing location, magnitude and total deaths
 #'
 #' @description \code{eq_create_label} takes a NOAA \code{data.frame} with columns
 #' \code{clean_location}, \code{EQ_PRIMARY} and \code{TOTAL_DEATHS} and produces
-#' a vector of \code{string}s with HTML encoded labels showing the location,
+#' a vector of \code{string}s contituting HTML encoded labels showing the location,
 #' magnitude and total, associated deaths caused the each quake.
 #'
 #' @param data is a \code{data.frame} with \code{clean_location}, \code{EQ_PRIMARY}
 #' and \code{TOTAL_DEATHS} columns.  The data in these columns is used to generate
-#' the HTML encoded label strings.
+#' HTML encoded label strings.
 #'
 #' @return a vector of HTML encoded, label \code{string}s.
 #'

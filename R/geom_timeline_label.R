@@ -58,8 +58,8 @@ GeomTimelineLabel  <- ggplot2::ggproto(
   draw_key = function(data, params, size) grid::nullGrob(), # Don't want any key for labels.  This is a null function.
 
   setup_data = function(data, params) {
-    sub_set_data <- function(data, n_max) { # Remove any data with size < n-max
 
+    sub_set_data <- function(data, n_max) { # Remove any data with size < n-max
       if (n_max < (.Machine$integer.max)) {
         num_rows <- nrow(data)
         last_row <- min(n_max, num_rows) # don't try to display rows > nrow of data frame.
@@ -112,21 +112,21 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' @description \code{geom_timeline_label} adds annotations to earthquake data
 #' timelines produced with \link{geom_timeline}. This geom adds a vertical
 #' line to each data point with a text annotation (e.g. the location of an
-#' earthquake) attached atop to each line.
+#' earthquake) attached atop each line.
 #' \code{geom_timeline_label} provides an option to subset to \code{n_max} number
 #' of earthquakes, where \code{n_max} selects the largest (by magnitude) earthquakes.
-#' This geometry supports the following aesthetics
-#' * x is the date of the earthquake and
-#' * label is the column name from which annotations will be obtained
+#' This geometry supports the following aesthetics:
+#' * \code{x} is the date of the earthquake and
+#' * \code{label} is the column name from which annotations will be obtained
 #'
 #' @inheritParams ggplot2::layer
 #'
-#' @param pointerheight is a \code{numeric} indicating the height of the pointer lines
-#' used for labels.  This height is epcified as a faction of the viewport height,
-#' and will usually not required adjustment.  The default value for this parameter
-#' is set to 0.05.
+#' @param pointerheight is a \code{numeric} indicating the height of lable, pointer lines
+#' This height is specified as a faction of the viewport height,
+#' and will usually not require adjustment.  The default value for this parameter
+#' is 0.05.
 #' @param angle is a \code{numeric} indicating the text label angle. Text is printed
-#' at an angle to allow good reaability and to reduce label collisions for dense
+#' at an angle to allow good readability and to reduce label collisions for dense
 #' time lines.  This angle won't usually require adjustment and is set at 45 degrees
 #' by default.
 #' @param n_max is a \code{numeric} giving the maximum number of labels to display.  This
@@ -137,16 +137,16 @@ GeomTimelineLabel  <- ggplot2::ggproto(
 #' default.
 #' @param na.rm a \code{boolean} indicating whether or not to remove NAs.
 #' \code{na.rm = FALSE} by default.
-#' @param fill a \code{string} colour the fill colour ro be used for labels
+#' @param fill a \code{string} indicating the label, fill colour.
 #' \code{fill = 'black'} by default.
 #' @param xmin is a \code{numeric} specifiying the minimum \code{x} value to consider.
 #' \code{xmin = .Machine$double.xmin} by default.
 #' @param xmax is a \code{numeric} specifiying the maximum \code{x} value to consider.
 #' \code{xmax = .Machine$double.xmax} by default.
 #' @param ... a \code{...} indicates a list of additional parameters
-#' use for a geom.  \code{geom_timeline} doesn't make use of these.
+#' used for a geom.  \code{geom_timeline_label} doesn't make use of these.
 #'
-#' @return a \code{ggplot} object representing timeline labels.  This is intended to be
+#' @return a \code{ggplot2} object representing timeline labels.  This is intended to be
 #' used with \link{geom_timeline}.
 #'
 #' @example inst/examples/example_timeline_label.R
