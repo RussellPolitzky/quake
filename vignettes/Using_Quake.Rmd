@@ -124,7 +124,7 @@ head(dt)
 ### Plot the sample data
 
 - date on the x axis, 
-- country on the y axis, 
+\beta^{2\ }+\sin\left(x\right)- country on the y axis, 
 - quake magnitude shown using marker size, 
 - the number of associated deaths indicated by colour
 

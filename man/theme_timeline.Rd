@@ -10,7 +10,7 @@ theme_timeline
 }
 \description{
 \code{theme_timeline} is a \code{ggplot2} theme useful
-for timelines because it turns off the superfluous y-axis.
+for timelines since it turns off the superfluous y-axis.
 }
 \examples{
 library(quake     )

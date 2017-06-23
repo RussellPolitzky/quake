@@ -20,11 +20,9 @@ Installation
 Cleaning Data
 -------------
 
-NOAA data is supplied without a consolidate date column and given locations includes countr, as well as province and city. As such, the `eq_clean_data` function adds a `date` column and one for `clean_location`.
+NOAA data is supplied without a consolidate date column and given locations includes country, as well as province and city. As such, the `eq_clean_data` function adds a `date` column as well as one for `clean_location`.
 
-In the example, below, tab separated NOAA data is read using the `data.table`'s `fread` function, and then cleaned using `eq_clean_data` is shown below.
-
-The code below reads a sample file using `data.table's` `fread` function and cleans it using `eq_clean_data`. The sample shows the first three rows and columns 1-5, and 48-49 of the cleaned output.
+The example code below reads a sample file using `data.table's` `fread` function and cleans it using `eq_clean_data`. The sample shows the first three rows and columns 1-5, and 48-49 of the cleaned output.
 
 ``` r
 library(data.table)
@@ -43,9 +41,9 @@ clean_data[1:3, c(1:5, 48:49)] # show 1st three rows and cols 1-5 and 48-49
 Plotting an Earthquake Timeline
 -------------------------------
 
-`quake` has two custom, `ggplot2` geometries to plot earthquake data. `geom_timeline` plots timelines while `geom_timeline_label` add labels to a timeline.
+`quake` has two custom, `ggplot2` geometries to plot earthquake data. `geom_timeline` plots timelines while `geom_timeline_label` adds labels to a timeline.
 
-The example code below generates sample data and plots a timeline showing the dates, magnitudes and countries of the quakes.
+The example code below generates sample data, and plots a timeline showing the dates, magnitudes and countries of the quakes.
 
 Generate sample data:
 
@@ -55,7 +53,7 @@ library(quake)
 library(ggplot2)
 library(data.table)
 
-n        <- 100 # no samples
+n        <- 100 # no. samples
 # get a list of countries and cities.
 cty_file <- system.file("extdata", "countries_cities.csv", package = "quake")
 ctry_cty <- (fread(cty_file))[sample(1:.N, size = n, replace = TRUE), ]
@@ -70,7 +68,12 @@ dt <- data.table(
 )
 ```
 
-Plot the sample data with: \* date on the x axis, \* country on the y axis, \* quake magnitude shown using marker size, \* the number of associated deaths indicated by colour
+Plot the sample data with:
+
+-   date on the x axis,
+-   country on the y axis,
+-   quake magnitude indicated by marker size and,
+-   the number of associated deaths indicated by colour
 
 ``` r
 dt %>%
@@ -91,16 +94,16 @@ dt %>%
   theme_timeline_with_y_axis_text
 ```
 
-![](README-plot_data-1.png) Notice `theme_timeline_with_y_axis_text` theme add-on, which is one of two themes provided by the `quake` package, the other being `theme_timeline`, which turns off all y-axis graphics inclusing the text.
+![](README-plot_data-1.png) Notice the `theme_timeline_with_y_axis_text` theme add-on. This is one of two themes provided by the `quake` package, the other being `theme_timeline`, which turns off all y-axis graphics including text.
 
-Also notice that by adding `y = country`, a timeline, separated by country, is produceb. Without this optional aesthetic, all quakes will be plotted in a single timeline.
+Also notice that by adding `y = country`, timelines grouped, by country, are produced. Without this optional aesthetic, all quakes will be plotted on a single timeline.
 
 Adding labels to An Earthquake Timeline
 ---------------------------------------
 
-The example above shows a timeline without labels. That is, the timeline doesn't show the actual locations at which the quakes happened. The `geom_timeline_label` solves this problem.
+The example above shows a timeline without labels. That is, the timeline doesn't indicate the actual locations at which the quakes happened. The `geom_timeline_label` addresses this problem.
 
-The example below shows a timeline, plotting the same data, but with labels added by `geom_timeline_label`.
+The example below shows a timeline, plotting the same data, but with labels added using `geom_timeline_label`.
 
 ``` r
 dt %>%
@@ -135,7 +138,13 @@ dt %>%
 Mapping Quakes
 --------------
 
-`quake` also aids visualization by plotting earthquake locations on a map. The code below: \* reads NOAA data, \* cleans it, \* filters for Mexico, \* adds popup text lables using the `eq_create_label` function and \* creates an interactive map with these labels.
+`quake` also aids visualization by plotting earthquake locations on a map. The code below:
+
+-   reads NOAA data,
+-   cleans it,
+-   filters for quakes that occurred Mexico,
+-   adds popup text labels using the `eq_create_label` function and
+-   creates an interactive map with these labels.
 
 ``` r
 library(quake)
@@ -152,6 +161,6 @@ read_delim(data_file_name, delim = "\t") %>%
   eq_map(annot_col = "popup_text")
 ```
 
-The image below shows sample output, after clicking on one of the quake locations to show it's pop-up detail.
+The image below shows sample output. The sample shows example pop-up detail displayed when a user clicks on a quake location.
 
 ![Sample Map](README-SampleMap.PNG)

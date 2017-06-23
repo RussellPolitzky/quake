@@ -49,28 +49,29 @@ the default plot specification, e.g. \code{\link{borders}}.}
 
 \item{xmin}{any type coercible to a \code{numeric} without additional parameters.
 \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
-aesthetic, since it's specifies the lower bound for it.  That's so say, the
+aesthetic, since it specifies the lower bound that aesthetic.  That's so say, the
 timeline will only show events in the data where \code{x >= xmin}.}
 
 \item{xmax}{any type coercible to a \code{numeric} without additional parameters.
 \code{xmin} is usually a \code{Date} and should correspond to the given \code{x}
-aesthetic, since it's specifies the lower bound for it.  That's so say, the
+aesthetic, since it's specifies the upper bound for that aesthetic.  That's so say, the
 timeline will only show events in the data where \code{x <= xmin}.}
 
 \item{...}{a \code{...} indicates a list of additional parameters
-use for a geom.  \code{geom_timeline} doesn't make use of these.}
+used for a geom.  \code{geom_timeline} doesn't make use of these.}
 }
 \value{
-a ggplot2 layer object.
+a \code{ggplot2} layer object.
 }
 \description{
 \code{geom_timeline} is a \code{ggplot2} layer function
-representing timelines.  code{geom_timeline} plots a time line of evenst ranging
-from \code{xmin} to \code{xmax} dates, with a point for each event
+representing timelines.  \code{geom_timeline} plots a time line of events
+ranging in time from \code{xmin} to \code{xmax} dates, with a point for each event.
 Optional aesthetics include \code{color}, \code{size}, and \code{alpha} (for transparency).
-The \code{x} aesthetic is usually a \code{Date} and an optional \code{y} aesthetic is a \code{factor}
-indicating some stratification in which case multiple time lines will be plotted for each
-level of the factor (e.g. country).
+The \code{x} aesthetic is usually a \code{Date} and an optional \code{y} aesthetic is
+a \code{factor} indicating stratification, in which case multiple time lines will be
+plotted for each factor level (e.g. factors may be countries so that quakes are
+grouped by country in the timeline plot).
 }
 \examples{
 library(quake     )

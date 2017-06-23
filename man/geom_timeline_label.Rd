@@ -48,13 +48,13 @@ rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link{borders}}.}
 
-\item{pointerheight}{is a \code{numeric} indicating the height of the pointer lines
-used for labels.  This height is epcified as a faction of the viewport height,
-and will usually not required adjustment.  The default value for this parameter
-is set to 0.05.}
+\item{pointerheight}{is a \code{numeric} indicating the height of lable, pointer lines
+This height is specified as a faction of the viewport height,
+and will usually not require adjustment.  The default value for this parameter
+is 0.05.}
 
 \item{angle}{is a \code{numeric} indicating the text label angle. Text is printed
-at an angle to allow good reaability and to reduce label collisions for dense
+at an angle to allow good readability and to reduce label collisions for dense
 time lines.  This angle won't usually require adjustment and is set at 45 degrees
 by default.}
 
@@ -66,7 +66,7 @@ reduces the number of label collisions in dense, timelime plots.  The labels to 
 are chosen based on the \code{size} aestheic.  Setting \code{n_max} will result
 in a maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being rendered.}
 
-\item{fill}{a \code{string} colour the fill colour ro be used for labels
+\item{fill}{a \code{string} indicating the label, fill colour.
 \code{fill = 'black'} by default.}
 
 \item{xmin}{is a \code{numeric} specifiying the minimum \code{x} value to consider.
@@ -76,23 +76,23 @@ in a maximum of \code{n_max} labels, ordered by the aesthetic \code{size}, being
 \code{xmax = .Machine$double.xmax} by default.}
 
 \item{...}{a \code{...} indicates a list of additional parameters
-use for a geom.  \code{geom_timeline} doesn't make use of these.}
+used for a geom.  \code{geom_timeline_label} doesn't make use of these.}
 }
 \value{
-a \code{ggplot} object representing timeline labels.  This is intended to be
+a \code{ggplot2} object representing timeline labels.  This is intended to be
 used with \link{geom_timeline}.
 }
 \description{
 \code{geom_timeline_label} adds annotations to earthquake data
 timelines produced with \link{geom_timeline}. This geom adds a vertical
 line to each data point with a text annotation (e.g. the location of an
-earthquake) attached atop to each line.
+earthquake) attached atop each line.
 \code{geom_timeline_label} provides an option to subset to \code{n_max} number
 of earthquakes, where \code{n_max} selects the largest (by magnitude) earthquakes.
-This geometry supports the following aesthetics
+This geometry supports the following aesthetics:
 \itemize{
-\item x is the date of the earthquake and
-\item label is the column name from which annotations will be obtained
+\item \code{x} is the date of the earthquake and
+\item \code{label} is the column name from which annotations will be obtained
 }
 }
 \examples{

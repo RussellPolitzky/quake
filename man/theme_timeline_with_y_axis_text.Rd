@@ -10,8 +10,8 @@ theme_timeline_with_y_axis_text
 }
 \description{
 \code{theme_timeline_with_y_axis_text} is a \code{ggplot2}
-theme useful' for timelines because it turns off the superfluous y-axis
-parts while leaving the y-axis labels.
+theme useful for timelines since it turns off the superfluous y-axis
+parts while leaving y-axis labels.
 }
 \examples{
 library(quake     )

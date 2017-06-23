@@ -8,15 +8,15 @@ eq_location_clean(locations)
 }
 \arguments{
 \item{locations}{is a \code{character} vector of locations.  Each vector element
-is in the "GREECE:  THERA ISLAND (SANTORINI)" form.}
+should have the "GREECE:  THERA ISLAND (SANTORINI)" format.}
 }
 \value{
 a \code{character} vector of cleaned names with country removed and in title case.
 }
 \description{
 \code{eq_location_clean} cleans the strings in the \code{LOCATION_NAME} column
-of the supplied NOAA \code{data.frame}. \code{eq_location_clean} strippsout the country
-name (including the colon) and converts names to title case (as opposed to all caps).
+of the supplied NOAA \code{data.frame}. \code{eq_location_clean} stripps out the country
+name, including the colon, and converts names to title case, as opposed to all caps.
 }
 \examples{
 library(data.table)

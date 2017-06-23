@@ -7,26 +7,26 @@
 eq_map(data, annot_col)
 }
 \arguments{
-\item{data}{is a filtered \code{data.frame} containing earthquake data
+\item{data}{is a \code{data.frame} containing earthquake data
 filtered to show quakes in an area of interest.}
 
-\item{annot_col}{is a \code{string} which is column name carrying
-annotations for marker pop-ups.  The annotation can be plain
-text or HTML.}
+\item{annot_col}{is a \code{string} which is the \code{data.frame}
+column name carrying annotations for marker pop-ups.  The annotation
+may be plain text or HTML.}
 }
 \value{
 \code{eq_map} returns a \code{leaflet} map object,
 }
 \description{
-\code{eq_map} takes a \code{data.frame} and with NOAA
-earthquake data and plots those on an interactive map, along with
+\code{eq_map} takes a \code{data.frame} with NOAA
+earthquake data, and plots those on an interactive map, along with
 annotations.  In addition to NOAA data, \code{eq_map} also takes a
 parameter indicating which \code{data.frame} column to use for
 marker, pop-up annotations.
 
 \code{eq_map} expects to find epicenter lattiude, longitude and earthquake
 magnitude in the \code{LATTITUDE}, \code{LONGITUDE} and \code{EQ_PRIMARY}
-columns, respectively.
+columns respectively.
 }
 \examples{
 library(quake)

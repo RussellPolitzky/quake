@@ -6,15 +6,16 @@
 \title{A \code{ggplot2} \code{Geom} prototype object for timelines}
 \value{
 \code{GeomTimeline} is a \code{ggplot2} prototype object; a collection of
-    functions and does not return anything perse.
+    functions and does not return anything perse.  In design pattern parlance,
+    \code{GeomTimeline} represents a geometry strategy.
 }
 \description{
-\code{GeomTimeline} is a \code{ggplot2} \code{Geom} prototype
+\code{GeomTimeline} is a \code{ggplot2} \code{geom} prototype
 object for timelines.  The geom plots a time line of earthquakes ranging
-from \code{xmin} to \code{xmax} dates with a point for each earthquake.
+from \code{xmin} to \code{xmax} dates with a marker for each earthquake.
 Optional aesthetics include \code{color}, \code{size}, and \code{alpha} (for transparency).
 The \code{x} aesthetic is a \code{Date} and an optional \code{y} aesthetic is a \code{factor}
-indicating some stratification in which case multiple time lines will be plotted for each
+indicating stratification in which case multiple time lines will be plotted for each
 level of the factor (e.g. country).
 }
 \examples{

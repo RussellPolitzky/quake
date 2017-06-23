@@ -8,7 +8,7 @@ eq_clean_data(raw_data)
 }
 \arguments{
 \item{raw_data}{is a NOAA \code{data.frame} in the format supplied by
-NOAA here: \url{https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1}
+NOAA (see \url{https://www.ngdc.noaa.gov/nndc/struts/form?t=101650&s=1&d=1})
 The \code{data.frame} should contain the following columns
 \itemize{
 \item "LATITUDE"
@@ -21,14 +21,14 @@ The \code{data.frame} should contain the following columns
 }}
 }
 \value{
-a \code{tbl data.frame} containing the cleaned data.
+a \code{data.frame} containing the cleaned data.
 }
 \description{
 \code{eq_clean_data} takes a NOAA data frame and returns a cleaned
-\code{data.frame}.  The clean \code{data.frame} has
-a date column, of type \code{Date}, created by uniting the year, month,
-day columns from the raw data.  The \code{LATITUDE} and \code{LONGITUDE}
-are converted to \code{numeric}s.
+\code{data.frame}.  The clean \code{data.frame} contains
+a date column, of type \code{Date}, created by uniting the year, month and
+day columns from the given, raw data.  The \code{LATITUDE} and \code{LONGITUDE}
+are converted to \code{numeric} types.
 }
 \examples{
 library(data.table)

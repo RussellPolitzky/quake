@@ -85,10 +85,11 @@ dt <- data.table(
 )
 ```
 Plot the sample data with:
-* date on the x axis, 
-* country on the y axis, 
-* quake magnitude indicated by marker size and, 
-* the number of associated deaths indicated by colour
+
+- date on the x axis, 
+- country on the y axis, 
+- quake magnitude indicated by marker size and, 
+- the number of associated deaths indicated by colour
 
 ```{r plot_data}
 dt %>%
@@ -159,11 +160,12 @@ dt %>%
 
 `quake` also aids visualization by plotting earthquake locations on a map.
 The code below:
-* reads NOAA data, 
-* cleans it,
-* filters for quakes that occurred Mexico,
-* adds popup text labels using the `eq_create_label` function and
-* creates an interactive map with these labels.
+
+- reads NOAA data, 
+- cleans it,
+- filters for quakes that occurred Mexico,
+- adds popup text labels using the `eq_create_label` function and
+- creates an interactive map with these labels.
 
 ```{r mapit, eval = FALSE}
 library(quake)
